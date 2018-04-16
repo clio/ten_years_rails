@@ -1,0 +1,46 @@
+#!/usr/bin/env ruby
+#
+# Output a markdown table containing the version differences between the Gemfile and Gemfile.next.
+# This can be used as a TODO list to bring the two Gemfiles as close to parity as possible,
+# either by upgrading gems within `Gemfile` or downgrading gems within `Gemfile.next`.
+#
+
+def parse_gem_versions(&block)
+  bundler_output = block.call
+  bundler_output.split("\n").each_with_object({}) do |line, hash|
+    next unless line.start_with?("Using")
+
+    gem_name, version = line.split(/\s+/)[1..2]
+    hash[gem_name] = version
+  end
+end
+
+rails_gems = [
+  "rails",
+  "activemodel",
+  "activerecord",
+  "actionmailer",
+  "actioncable",
+  "actionpack",
+  "actionview",
+  "activejob",
+  "activestorage",
+  "activesupport",
+  "railties",
+]
+
+gems = parse_gem_versions { `BUNDLE_CACHE_PATH=vendor/cache BUNDLE_GEMFILE=Gemfile bundle install` }
+gems_next = parse_gem_versions { `BUNDLE_CACHE_PATH=vendor/cache.next BUNDLE_GEMFILE=Gemfile.next bundle install` }
+all_gem_names = (gems.keys + gems_next.keys).uniq.sort
+
+puts "| Gem | `Gemfile` version | `Gemfile.next` version | Rails internals |"
+puts "|-----|-------------------|------------------------|-----------------| "
+all_gem_names.each do |gem_name|
+  gem_version = gems[gem_name] || "-"
+  gem_next_version = gems_next[gem_name] || "-"
+  rails_internal = rails_gems.include?(gem_name) ? "✅" : ""
+
+  if gem_version != gem_next_version
+    puts "| **#{gem_name}** | #{gem_version} | #{gem_next_version} | #{rails_internal} |"
+  end
+end
