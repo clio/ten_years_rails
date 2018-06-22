@@ -258,7 +258,6 @@ class BundleReport
         "activestorage",
         "activesupport",
         "railties",
-        "rails-dom-testing",
       ]
     end
   end
