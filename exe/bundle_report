@@ -25,7 +25,7 @@ at_exit do
       options[:rails_version] = rails_version
     end
 
-    opts.on("--include-rails-gems", "Inlcude Rails gems in compatibility report (defaults to false)") do
+    opts.on("--include-rails-gems", "Include Rails gems in compatibility report (defaults to false)") do
       options[:include_rails_gems] = true
     end
 
