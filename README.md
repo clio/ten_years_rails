@@ -1,6 +1,6 @@
 # Ten Years of Rails Upgrades
 
-This is a companion to the "Ten Years of Rails Upgrades" conference talk from RailsConf 2018. You'll find various utilities that we use at Clio to help us prepare for and complete Rails upgrades.
+This is a companion to the "Ten Years of Rails Upgrades" conference talk. You'll find various utilities that we use at Clio to help us prepare for and complete Rails upgrades.
 
 These scripts are still early days and may not work in every environment or app.
 
@@ -80,7 +80,7 @@ next rails s        # Start server using Gemfile.next
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'ten_years_rails_conf_2018'
+gem 'ten_years_rails'
 ```
 
 And then execute:
@@ -89,7 +89,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install ten_years_rails_conf_2018
+    $ gem install ten_years_rails
 
 ## License
 
