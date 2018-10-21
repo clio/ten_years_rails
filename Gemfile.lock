@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    ten_years_rails_conf_2018 (0.1.0)
+    ten_years_rails (0.1.0)
       actionview
       activesupport
       colorize (>= 0.8.1)
@@ -81,7 +81,7 @@ DEPENDENCIES
   bundler (~> 1.16)
   rake (~> 10.0)
   rspec (~> 3.0)
-  ten_years_rails_conf_2018!
+  ten_years_rails!
 
 BUNDLED WITH
    1.16.1

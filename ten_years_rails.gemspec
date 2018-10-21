@@ -1,16 +1,16 @@
 
 lib = File.expand_path("../lib", __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require "ten_years_rails_conf_2018/version"
+require "ten_years_rails/version"
 
 Gem::Specification.new do |spec|
-  spec.name          = "ten_years_rails_conf_2018"
-  spec.version       = TenYearsRailsConf2018::VERSION
+  spec.name          = "ten_years_rails"
+  spec.version       = TenYearsRails::VERSION
   spec.authors       = ["Jordan Raine"]
   spec.email         = ["jnraine@gmail.com"]
 
-  spec.summary       = %q{Companion code to Ten Years of Rails Upgrade at RailsConf2018}
-  spec.homepage      = "https://github.com/clio/ten_years_rails_conf_2018"
+  spec.summary       = %q{Companion code to Ten Years of Rails Upgrades}
+  spec.homepage      = "https://github.com/clio/ten_years_rails"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0").reject do |f|
