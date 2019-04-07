@@ -1,6 +1,6 @@
 #!/bin/bash
 if [[ "${@}" == "--init" ]]; then
-  echo "doing a thing"
+  echo "Creating a symlink (Gemfile.next -> Gemfile)"
   # Add next? top of Gemfile
   cat <<-STRING > Gemfile.tmp
 def next?
@@ -11,6 +11,7 @@ STRING
   mv Gemfile.tmp Gemfile
 
   ln -s Gemfile Gemfile.next
+  echo "Created a symlink. Added helper method to Gemfile."
   exit $?
 fi
 
