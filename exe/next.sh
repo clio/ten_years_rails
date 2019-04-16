@@ -1,6 +1,5 @@
 #!/bin/bash
 if [[ "${@}" == "--init" ]]; then
-  echo "doing a thing"
   # Add next? top of Gemfile
   cat <<-STRING > Gemfile.tmp
 def next?
@@ -11,6 +10,19 @@ STRING
   mv Gemfile.tmp Gemfile
 
   ln -s Gemfile Gemfile.next
+  echo <<-MESSAGE
+Created Gemfile.next (a symlink to your Gemfile). Your Gemfile has been modified to support dual-booting!
+
+There's just one more step: modify your Gemfile to use a newer version of Rails using the \`next?\` helper method.
+
+For example, here's how to go from 5.2.3 to 6.0:
+
+if next?
+  gem "rails", "6.0.0"
+else
+  gem "rails", "5.2.3"
+end
+MESSAGE
   exit $?
 fi
 
