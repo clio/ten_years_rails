@@ -1,7 +1,8 @@
 require "tempfile"
-require_relative "../support/deprecation_tracker"
+require_relative "spec_helper"
+require_relative "../lib/deprecation_tracker"
 
-describe DeprecationTracker do
+RSpec.describe DeprecationTracker do
   let(:shitlist_path) do
     shitlist_path = Tempfile.new.path
     FileUtils.rm(shitlist_path)
@@ -218,4 +219,3 @@ describe DeprecationTracker do
     end
   end
 end
-
