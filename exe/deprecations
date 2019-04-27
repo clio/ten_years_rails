@@ -36,7 +36,7 @@ end
 
 options = {}
 option_parser = OptionParser.new do |opts|
-  opts.banner = <<~MESSAGE
+  opts.banner = <<-MESSAGE
     Usage: #{__FILE__.to_s} [options] [mode]
 
       Parses the deprecation warning shitlist and show info or run tests.

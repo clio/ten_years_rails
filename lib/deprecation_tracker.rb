@@ -86,7 +86,7 @@ class DeprecationTracker
     end
 
     if changed_buckets.length > 0
-      message = <<~MESSAGE.red
+      message = <<-MESSAGE.red
         ⚠️  Deprecation warnings have changed!
 
         Code called by the following spec files is now generating different deprecation warnings:
@@ -119,7 +119,7 @@ class DeprecationTracker
     new_shitlist = create_temp_shitlist
     FileUtils.cp(new_shitlist.path, shitlist_path)
   ensure
-    new_shitlist&.delete
+    new_shitlist.delete if new_shitlist
   end
 
   def create_temp_shitlist
