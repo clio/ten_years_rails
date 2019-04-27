@@ -4,7 +4,7 @@ require_relative "../lib/deprecation_tracker"
 
 RSpec.describe DeprecationTracker do
   let(:shitlist_path) do
-    shitlist_path = Tempfile.new.path
+    shitlist_path = Tempfile.new("tmp").path
     FileUtils.rm(shitlist_path)
     shitlist_path
   end
@@ -92,14 +92,14 @@ RSpec.describe DeprecationTracker do
 
       subject.save
 
-      expected_json = <<~JSON.chomp
-        {
-          "bucket 1": [
-            "a",
-            "b",
-            "b"
-          ]
-        }
+      expected_json = <<-JSON.chomp
+{
+  "bucket 1": [
+    "a",
+    "b",
+    "b"
+  ]
+}
       JSON
       expect(File.read(shitlist_path)).to eq(expected_json)
     end
@@ -116,15 +116,15 @@ RSpec.describe DeprecationTracker do
       subject.add("a")
       subject.save
 
-      expected_json = <<~JSON.chomp
-        {
-          "bucket 1": [
-            "a"
-          ],
-          "bucket 2": [
-            "a"
-          ]
-        }
+      expected_json = <<-JSON.chomp
+{
+  "bucket 1": [
+    "a"
+  ],
+  "bucket 2": [
+    "a"
+  ]
+}
       JSON
       expect(File.read(shitlist_path)).to eq(expected_json)
     end
@@ -141,12 +141,12 @@ RSpec.describe DeprecationTracker do
       subject.add("b")
       subject.save
 
-      expected_json = <<~JSON.chomp
-        {
-          "bucket 1": [
-            "b"
-          ]
-        }
+      expected_json = <<-JSON.chomp
+{
+  "bucket 1": [
+    "b"
+  ]
+}
       JSON
       expect(File.read(shitlist_path)).to eq(expected_json)
     end
@@ -159,15 +159,15 @@ RSpec.describe DeprecationTracker do
       subject.add("a")
       subject.save
 
-      expected_json = <<~JSON.chomp
-        {
-          "bucket 1": [
-            "a"
-          ],
-          "bucket 2": [
-            "a"
-          ]
-        }
+      expected_json = <<-JSON.chomp
+{
+  "bucket 1": [
+    "a"
+  ],
+  "bucket 2": [
+    "a"
+  ]
+}
       JSON
       expect(File.read(shitlist_path)).to eq(expected_json)
     end
@@ -180,14 +180,14 @@ RSpec.describe DeprecationTracker do
       subject.add("a")
       subject.save
 
-      expected_json = <<~JSON.chomp
-        {
-          "bucket 1": [
-            "a",
-            "b",
-            "c"
-          ]
-        }
+      expected_json = <<-JSON.chomp
+{
+  "bucket 1": [
+    "a",
+    "b",
+    "c"
+  ]
+}
       JSON
       expect(File.read(shitlist_path)).to eq(expected_json)
     end
