@@ -3,7 +3,6 @@ PATH
   specs:
     ten_years_rails (0.2.0)
       actionview
-      activesupport
       colorize (>= 0.8.1)
       rest-client (>= 2.0.2)
 
@@ -31,7 +30,7 @@ GEM
     erubi (1.8.0)
     http-cookie (1.0.3)
       domain_name (~> 0.5)
-    i18n (1.6.0)
+    i18n (1.5.1)
       concurrent-ruby (~> 1.0)
     loofah (2.2.3)
       crass (~> 1.0.2)
@@ -42,7 +41,7 @@ GEM
     mini_portile2 (2.4.0)
     minitest (5.11.3)
     netrc (0.11.0)
-    nokogiri (1.10.2)
+    nokogiri (1.9.1)
       mini_portile2 (~> 2.4.0)
     rails-dom-testing (2.0.3)
       activesupport (>= 4.2.0)
@@ -72,7 +71,7 @@ GEM
       thread_safe (~> 0.1)
     unf (0.1.4)
       unf_ext
-    unf_ext (0.0.7.5)
+    unf_ext (0.0.7.6)
 
 PLATFORMS
   ruby
