@@ -39,7 +39,10 @@ class DeprecationTracker
     end
   end
 
-  def self.track_rspec(rspec_config, shitlist_path:, mode:, transform_message: nil)
+  def self.track_rspec(rspec_config, opts = {})
+    shitlist_path = opts[:shitlist_path]
+    mode = opts[:mode]
+    transform_message = opts[:transform_message]
     deprecation_tracker = DeprecationTracker.new(shitlist_path, transform_message)
     if defined?(ActiveSupport)
       ActiveSupport::Deprecation.behavior << -> (message, _callstack) { deprecation_tracker.add(message) }

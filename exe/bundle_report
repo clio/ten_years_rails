@@ -64,7 +64,10 @@ require "json"
 require "rest-client"
 
 class BundleReport
-  def self.compatibility(rails_version:, include_rails_gems:)
+  def self.compatibility(opts = {})
+    rails_version = opts[:rails_version]
+    include_rails_gems = opts[:include_rails_gems]
+
     incompatible_gems = BundleReport::GemInfo.all.reject do |gem|
       gem.compatible_with_rails?(rails_version: rails_version) || (!include_rails_gems && gem.from_rails?)
     end.sort_by do |gem|
@@ -229,11 +232,13 @@ class BundleReport
       end
     end
 
-    def compatible_with_rails?(rails_version: Gem::Version.new("5.0"))
+    def compatible_with_rails?(opts = {})
+      rails_version = opts[:rails_version] || Gem::Version.new("5.0")
       unsatisfied_rails_dependencies(rails_version: rails_version).empty?
     end
 
-    def unsatisfied_rails_dependencies(rails_version:)
+    def unsatisfied_rails_dependencies(opts = {})
+      rails_version = opts[:rails_version]
       rails_dependencies = gem_specification.runtime_dependencies.select {|dependency| rails_gems.include?(dependency.name) }
 
       rails_dependencies.reject do |rails_dependency|

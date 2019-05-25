@@ -4,7 +4,9 @@ require "colorize"
 require "optparse"
 require "set"
 
-def run_tests(deprecation_warnings, tracker_mode:, next_mode:)
+def run_tests(deprecation_warnings, opts = {})
+  tracker_mode = opts[:tracker_mode]
+  next_mode = opts[:next_mode]
   rspec_command = if next_mode
     "bin/next rspec"
   else
@@ -16,7 +18,8 @@ def run_tests(deprecation_warnings, tracker_mode:, next_mode:)
   exec command
 end
 
-def print_info(deprecation_warnings, verbose: false)
+def print_info(deprecation_warnings, opts = {})
+  verbose = !!opts[:verbose]
   frequency_by_message = deprecation_warnings.each_with_object({}) do |(test_file, messages), hash|
     messages.each do |message|
       hash[message] ||= { test_files: Set.new, occurrences: 0 }
