@@ -1,3 +1,4 @@
+require "colorize"
 require "json"
 
 # A shitlist for deprecation warnings during test runs. It has two modes: "save" and "compare"
