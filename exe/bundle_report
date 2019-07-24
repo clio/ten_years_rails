@@ -9,7 +9,7 @@ at_exit do
 
   options = {}
   option_parser = OptionParser.new do |opts|
-    opts.banner = <<~EOS
+    opts.banner = <<-EOS
       Usage: #{$0} [report-type] [options]
 
       report-type  There are two report types available: `outdated` and `compatibility`
