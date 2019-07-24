@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    ten_years_rails (0.2.0)
+    next_rails (0.2.0)
       actionview
       colorize (>= 0.8.1)
 
@@ -63,9 +63,9 @@ PLATFORMS
 
 DEPENDENCIES
   bundler (~> 1.16)
+  next_rails!
   rake (~> 10.0)
   rspec (~> 3.0)
-  ten_years_rails!
   timecop (~> 0.9.1)
 
 BUNDLED WITH

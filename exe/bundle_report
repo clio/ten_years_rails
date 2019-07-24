@@ -5,7 +5,7 @@
 #
 at_exit do
   require "optparse"
-  require "ten_years_rails"
+  require "next_rails"
 
   options = {}
   option_parser = OptionParser.new do |opts|
