@@ -2,7 +2,6 @@ require "colorize"
 require "cgi"
 require "erb"
 require "json"
-require "rest-client"
 
 module TenYearsRails
   class BundleReport
