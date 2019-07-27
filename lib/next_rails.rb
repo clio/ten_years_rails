@@ -3,6 +3,6 @@ require "next_rails/version"
 require "next_rails/bundle_report"
 require "deprecation_tracker"
 
-module TenYearsRails
+module NextRails
   # Your code goes here...
 end

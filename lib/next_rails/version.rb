@@ -1,3 +1,3 @@
-module TenYearsRails
-  VERSION = "1.0.0"
+module NextRails
+  VERSION = "1.0.1"
 end

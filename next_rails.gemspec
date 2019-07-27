@@ -5,7 +5,7 @@ require "next_rails/version"
 
 Gem::Specification.new do |spec|
   spec.name          = "next_rails"
-  spec.version       = TenYearsRails::VERSION
+  spec.version       = NextRails::VERSION
   spec.authors       = ["Jordan Raine", "Ernesto Tagwerker"]
   spec.email         = ["jnraine@gmail.com", "ernesto@ombulabs.com"]
 

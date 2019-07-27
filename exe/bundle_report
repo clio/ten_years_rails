@@ -47,9 +47,9 @@ at_exit do
   report_type = ARGV.first
 
   case report_type
-  when "outdated" then BundleReport.outdated
+  when "outdated" then NextRails::BundleReport.outdated
   else
-    TenYearsRails::BundleReport.compatibility(rails_version: options.fetch(:rails_version, "5.0"), include_rails_gems: options.fetch(:include_rails_gems, false))
+    NextRails::BundleReport.compatibility(rails_version: options.fetch(:rails_version, "5.0"), include_rails_gems: options.fetch(:include_rails_gems, false))
   end
 end
 

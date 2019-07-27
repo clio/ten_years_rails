@@ -4,7 +4,7 @@ rescue LoadError
   puts "ActionView not available"
 end
 
-module TenYearsRails
+module NextRails
   class GemInfo
     if defined?(ActionView)
       include ActionView::Helpers::DateHelper

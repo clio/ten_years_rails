@@ -1,5 +1,5 @@
-RSpec.describe TenYearsRails do
+RSpec.describe NextRails do
   it "has a version number" do
-    expect(TenYearsRails::VERSION).not_to be nil
+    expect(NextRails::VERSION).not_to be nil
   end
 end

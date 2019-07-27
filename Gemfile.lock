@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    next_rails (0.2.0)
+    next_rails (1.0.0)
       actionview
       colorize (>= 0.8.1)
 

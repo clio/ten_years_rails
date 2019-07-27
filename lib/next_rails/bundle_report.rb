@@ -3,10 +3,10 @@ require "cgi"
 require "erb"
 require "json"
 
-module TenYearsRails
+module NextRails
   class BundleReport
     def self.compatibility(rails_version:, include_rails_gems:)
-      incompatible_gems = TenYearsRails::GemInfo.all.reject do |gem|
+      incompatible_gems = NextRails::GemInfo.all.reject do |gem|
         gem.compatible_with_rails?(rails_version: rails_version) || (!include_rails_gems && gem.from_rails?)
       end.sort_by do |gem|
         [
@@ -59,7 +59,7 @@ module TenYearsRails
     end
 
     def self.outdated
-      gems = TenYearsRails::GemInfo.all
+      gems = NextRails::GemInfo.all
       out_of_date_gems = gems.reject(&:up_to_date?).sort_by(&:created_at)
       percentage_out_of_date = ((out_of_date_gems.count / gems.count.to_f) * 100).round
       sourced_from_git = gems.select(&:sourced_from_git?)

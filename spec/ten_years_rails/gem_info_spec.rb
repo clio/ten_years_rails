@@ -1,7 +1,7 @@
 require "spec_helper"
 require "timecop"
 
-RSpec.describe TenYearsRails::GemInfo do
+RSpec.describe NextRails::GemInfo do
   let(:release_date) { Time.utc(2019, 7, 6, 0, 0, 0) }
   let(:now) { Time.utc(2019, 7, 6, 12, 0, 0) }
   let(:spec) do
@@ -10,7 +10,7 @@ RSpec.describe TenYearsRails::GemInfo do
     end
   end
 
-  subject { TenYearsRails::GemInfo.new(spec) }
+  subject { NextRails::GemInfo.new(spec) }
 
   describe "#age" do
     around do |example|
