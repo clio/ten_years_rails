@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
 
   spec.summary       = %q{Companion code to Ten Years of Rails Upgrades}
   spec.description   = %q{A set of handy tools to upgrade your Rails application and keep it up to date}
-  spec.homepage      = "https://github.com/fastruby/ten_years_rails"
+  spec.homepage      = "https://github.com/fastruby/next_rails"
   spec.license       = "MIT"
 
   spec.required_ruby_version = ">= 2.3.0"
