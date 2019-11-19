@@ -10,8 +10,11 @@ Gem::Specification.new do |spec|
   spec.email         = ["jnraine@gmail.com"]
 
   spec.summary       = %q{Companion code to Ten Years of Rails Upgrades}
+  spec.description   = %q{A set of handy tools to upgrade your Rails application and keep it up to date}
   spec.homepage      = "https://github.com/clio/ten_years_rails"
   spec.license       = "MIT"
+
+  spec.required_ruby_version = ">= 2.3.0"
 
   spec.files         = `git ls-files -z`.split("\x0").reject do |f|
     f.match(%r{^(test|spec|features)/})
