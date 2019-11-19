@@ -42,7 +42,7 @@ GEM
     mini_portile2 (2.4.0)
     minitest (5.11.3)
     netrc (0.11.0)
-    nokogiri (1.10.2)
+    nokogiri (1.10.5)
       mini_portile2 (~> 2.4.0)
     rails-dom-testing (2.0.3)
       activesupport (>= 4.2.0)
