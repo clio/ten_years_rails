@@ -61,7 +61,6 @@ require "colorize"
 require "cgi"
 require "erb"
 require "json"
-require "rest-client"
 
 class BundleReport
   def self.compatibility(rails_version:, include_rails_gems:)
