@@ -29,11 +29,24 @@ class DeprecationTracker
 
   # There are two forms of the `warn` method: one for class Kernel and one for instances of Kernel (i.e., every Object)
   Object.prepend(KernelWarnTracker)
-  Kernel.singleton_class.prepend(KernelWarnTracker)
 
-  def self.track_rspec(rspec_config, shitlist_path:, mode:, transform_message: nil)
+  # Ruby 2.2 and lower doesn't appear to allow overriding of Kernel.warn using `singleton_class.prepend`.
+  if Gem::Version.new(RUBY_VERSION) >= Gem::Version.new("2.3.0")
+    Kernel.singleton_class.prepend(KernelWarnTracker)
+  else
+    def Kernel.warn(*args, &block)
+      Object.warn(*args, &block)
+    end
+  end
+
+  def self.track_rspec(rspec_config, opts = {})
+    shitlist_path = opts[:shitlist_path]
+    mode = opts[:mode]
+    transform_message = opts[:transform_message]
     deprecation_tracker = DeprecationTracker.new(shitlist_path, transform_message)
-    ActiveSupport::Deprecation.behavior << -> (message, _callstack, _deprecation_horizon, _gem_name) { deprecation_tracker.add(message) }
+    if defined?(ActiveSupport)
+      ActiveSupport::Deprecation.behavior << -> (message, _callstack, _deprecation_horizon, _gem_name) { deprecation_tracker.add(message) }
+    end
     KernelWarnTracker.callbacks << -> (message) { deprecation_tracker.add(message) }
 
     rspec_config.around do |example|
@@ -86,7 +99,7 @@ class DeprecationTracker
     end
 
     if changed_buckets.length > 0
-      message = <<~MESSAGE.red
+      message = <<-MESSAGE.red
         ⚠️  Deprecation warnings have changed!
 
         Code called by the following spec files is now generating different deprecation warnings:
@@ -119,7 +132,7 @@ class DeprecationTracker
     new_shitlist = create_temp_shitlist
     FileUtils.cp(new_shitlist.path, shitlist_path)
   ensure
-    new_shitlist&.delete
+    new_shitlist.delete if new_shitlist
   end
 
   def create_temp_shitlist

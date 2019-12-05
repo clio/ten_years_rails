@@ -5,10 +5,11 @@
 #
 at_exit do
   require "optparse"
+  require "ten_years_rails"
 
   options = {}
   option_parser = OptionParser.new do |opts|
-    opts.banner = <<~EOS
+    opts.banner = <<-EOS
       Usage: #{$0} [report-type] [options]
 
       report-type  There are two report types available: `outdated` and `compatibility`
@@ -46,9 +47,9 @@ at_exit do
   report_type = ARGV.first
 
   case report_type
-  when "outdated" then BundleReport.outdated
+  when "outdated" then TenYearsRails::BundleReport.outdated
   else
-    BundleReport.compatibility(rails_version: options.fetch(:rails_version, "5.0"), include_rails_gems: options.fetch(:include_rails_gems, false))
+    TenYearsRails::BundleReport.compatibility(rails_version: options.fetch(:rails_version, "5.0"), include_rails_gems: options.fetch(:include_rails_gems, false))
   end
 end
 
@@ -57,207 +58,3 @@ require "bundler/setup"
 
 require "action_view"
 require "active_support/core_ext/object/acts_like"
-require "colorize"
-require "cgi"
-require "erb"
-require "json"
-
-class BundleReport
-  def self.compatibility(rails_version:, include_rails_gems:)
-    incompatible_gems = BundleReport::GemInfo.all.reject do |gem|
-      gem.compatible_with_rails?(rails_version: rails_version) || (!include_rails_gems && gem.from_rails?)
-    end.sort_by do |gem|
-      [
-        gem.latest_version.compatible_with_rails?(rails_version: rails_version) ? 0 : 1,
-        gem.name
-      ].join("-")
-    end
-
-    incompatible_gems_by_state = incompatible_gems.group_by { |gem| gem.state(rails_version) }
-
-    template = <<~ERB
-      <% if incompatible_gems_by_state[:latest_compatible] -%>
-      <%= "=> Incompatible with Rails #{rails_version} (with new versions that are compatible):".white.bold %>
-      <%= "These gems will need to be upgraded before upgrading to Rails #{rails_version}.".italic %>
-
-      <% incompatible_gems_by_state[:latest_compatible].each do |gem| -%>
-      <%= gem_header(gem) %> - upgrade to <%= gem.latest_version.version %>
-      <% end -%>
-
-      <% end -%>
-      <% if incompatible_gems_by_state[:incompatible] -%>
-      <%= "=> Incompatible with Rails #{rails_version} (with no new compatible versions):".white.bold %>
-      <%= "These gems will need to be removed or replaced before upgrading to Rails #{rails_version}.".italic %>
-
-      <% incompatible_gems_by_state[:incompatible].each do |gem| -%>
-      <%= gem_header(gem) %> - new version, <%= gem.latest_version.version %>, is not compatible with Rails #{rails_version}
-      <% end -%>
-
-      <% end -%>
-      <% if incompatible_gems_by_state[:no_new_version] -%>
-      <%= "=> Incompatible with Rails #{rails_version} (with no new versions):".white.bold %>
-      <%= "These gems will need to be upgraded by us or removed before upgrading to Rails #{rails_version}.".italic %>
-      <%= "This list is likely to contain internal gems, like Cuddlefish.".italic %>
-
-      <% incompatible_gems_by_state[:no_new_version].each do |gem| -%>
-      <%= gem_header(gem) %> - new version not found
-      <% end -%>
-
-      <% end -%>
-      <%= incompatible_gems.length.to_s.red %> gems incompatible with Rails <%= rails_version %>
-    ERB
-
-    puts ERB.new(template, nil, "-").result(binding)
-  end
-
-  def self.gem_header(_gem)
-    header = "#{_gem.name} #{_gem.version}".bold
-    header << " (loaded from git)".magenta if _gem.sourced_from_git?
-    header
-  end
-
-  def self.outdated
-    gems = BundleReport::GemInfo.all
-    out_of_date_gems = gems.reject(&:up_to_date?).sort_by(&:created_at)
-    percentage_out_of_date = ((out_of_date_gems.count / gems.count.to_f) * 100).round
-    sourced_from_git = gems.select(&:sourced_from_git?)
-
-    out_of_date_gems.each do |_gem|
-      header = "#{_gem.name} #{_gem.version}"
-
-      puts <<~MESSAGE
-        #{header.bold.white}: released #{_gem.age} (latest version, #{_gem.latest_version.version}, released #{_gem.latest_version.age})
-      MESSAGE
-    end
-
-    puts ""
-    puts <<~MESSAGE
-      #{"#{sourced_from_git.count}".yellow} gems are sourced from git
-      #{"#{out_of_date_gems.length}".red} of the #{gems.count} gems are out-of-date (#{percentage_out_of_date}%)
-    MESSAGE
-  end
-
-  class GemInfo
-    include ActionView::Helpers::DateHelper
-
-    class NullGemInfo < GemInfo
-      def initialize; end
-
-      def age
-        "-"
-      end
-
-      def time_to_latest_version
-        "-"
-      end
-
-      def created_at
-        Time.now
-      end
-
-      def up_to_date?
-        false
-      end
-
-      def version
-        "NOT FOUND"
-      end
-
-      def unsatisfied_rails_dependencies(*)
-        ["unknown"]
-      end
-
-      def state(_)
-        :null
-      end
-    end
-
-    def self.all
-      Gem::Specification.each.map do |gem_specification|
-        new(gem_specification)
-      end
-    end
-
-    attr_reader :gem_specification, :version, :name
-    def initialize(gem_specification)
-      @gem_specification = gem_specification
-      @version = gem_specification.version
-      @name = gem_specification.name
-    end
-
-    def age
-      "#{time_ago_in_words(created_at)} ago"
-    end
-
-    def sourced_from_git?
-      !!gem_specification.git_version
-    end
-
-    def time_to_latest_version
-      distance_of_time_in_words(created_at, latest_version.created_at)
-    end
-
-    def created_at
-      @created_at ||= gem_specification.date
-    end
-
-    def up_to_date?
-      version == latest_version.version
-    end
-
-    def state(rails_version)
-      if compatible_with_rails?(rails_version: rails_version)
-        :compatible
-      elsif latest_version.compatible_with_rails?(rails_version: rails_version)
-        :latest_compatible
-      elsif latest_version.version == "NOT FOUND"
-        :no_new_version
-      else
-        :incompatible
-      end
-    end
-
-    def latest_version
-      @latest_version ||= begin
-        latest_gem_specification = Gem.latest_spec_for(name)
-        if latest_gem_specification
-          GemInfo.new(latest_gem_specification)
-        else
-          NullGemInfo.new
-        end
-      end
-    end
-
-    def compatible_with_rails?(rails_version: Gem::Version.new("5.0"))
-      unsatisfied_rails_dependencies(rails_version: rails_version).empty?
-    end
-
-    def unsatisfied_rails_dependencies(rails_version:)
-      rails_dependencies = gem_specification.runtime_dependencies.select {|dependency| rails_gems.include?(dependency.name) }
-
-      rails_dependencies.reject do |rails_dependency|
-        rails_dependency.requirement.satisfied_by?(Gem::Version.new(rails_version))
-      end
-    end
-
-    def from_rails?
-      rails_gems.include?(name)
-    end
-
-    private def rails_gems
-      [
-        "rails",
-        "activemodel",
-        "activerecord",
-        "actionmailer",
-        "actioncable",
-        "actionpack",
-        "actionview",
-        "activejob",
-        "activestorage",
-        "activesupport",
-        "railties",
-      ]
-    end
-  end
-end
