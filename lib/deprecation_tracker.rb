@@ -1,4 +1,4 @@
-require "colorize"
+require "rainbow"
 require "json"
 
 # A shitlist for deprecation warnings during test runs. It has two modes: "save" and "compare"
@@ -99,7 +99,7 @@ class DeprecationTracker
     end
 
     if changed_buckets.length > 0
-      message = <<-MESSAGE.red
+      message = Rainbow(<<-MESSAGE).red
         ⚠️  Deprecation warnings have changed!
 
         Code called by the following spec files is now generating different deprecation warnings:

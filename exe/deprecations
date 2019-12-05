@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 require "json"
-require "colorize"
+require "rainbow"
 require "optparse"
 require "set"
 
@@ -30,9 +30,9 @@ def print_info(deprecation_warnings, opts = {})
 
   puts "Ten most common deprecation warnings:".underline
   frequency_by_message.take(10).each do |message, data|
-    puts "Occurrences: #{data.fetch(:occurrences)}".bold
+    puts Rainbow("Occurrences: #{data.fetch(:occurrences)}").bold
     puts "Test files: #{data.fetch(:test_files).to_a.join(" ")}" if verbose
-    puts message.red
+    puts Rainbow(message).red
     puts "----------"
   end
 end
@@ -104,10 +104,10 @@ case options.fetch(:mode, "info")
 when "run" then run_tests(deprecation_warnings, next_mode: options[:next], tracker_mode: options[:tracker_mode])
 when "info" then print_info(deprecation_warnings, verbose: options[:verbose])
 when nil
-  STDERR.puts "Must pass a mode: run or info".red
+  STDERR.puts Rainbow("Must pass a mode: run or info").red
   puts option_parser
   exit 1
 else
-  STDERR.puts "Unknown mode: #{options[:mode]}".red
+  STDERR.puts Rainbow("Unknown mode: #{options[:mode]}").red
   exit 1
 end

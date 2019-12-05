@@ -1,4 +1,4 @@
-require "colorize"
+require "rainbow"
 require "cgi"
 require "erb"
 require "json"
@@ -19,8 +19,8 @@ module TenYearsRails
 
       template = <<~ERB
         <% if incompatible_gems_by_state[:latest_compatible] -%>
-        <%= "=> Incompatible with Rails #{rails_version} (with new versions that are compatible):".white.bold %>
-        <%= "These gems will need to be upgraded before upgrading to Rails #{rails_version}.".italic %>
+        <%= Rainbow("=> Incompatible with Rails #{rails_version} (with new versions that are compatible):").white.bold %>
+        <%= Rainbow("These gems will need to be upgraded before upgrading to Rails #{rails_version}.").italic %>
 
         <% incompatible_gems_by_state[:latest_compatible].each do |gem| -%>
         <%= gem_header(gem) %> - upgrade to <%= gem.latest_version.version %>
@@ -28,8 +28,8 @@ module TenYearsRails
 
         <% end -%>
         <% if incompatible_gems_by_state[:incompatible] -%>
-        <%= "=> Incompatible with Rails #{rails_version} (with no new compatible versions):".white.bold %>
-        <%= "These gems will need to be removed or replaced before upgrading to Rails #{rails_version}.".italic %>
+        <%= Rainbow("=> Incompatible with Rails #{rails_version} (with no new compatible versions):").white.bold %>
+        <%= Rainbow("These gems will need to be removed or replaced before upgrading to Rails #{rails_version}.").italic %>
 
         <% incompatible_gems_by_state[:incompatible].each do |gem| -%>
         <%= gem_header(gem) %> - new version, <%= gem.latest_version.version %>, is not compatible with Rails #{rails_version}
@@ -37,16 +37,16 @@ module TenYearsRails
 
         <% end -%>
         <% if incompatible_gems_by_state[:no_new_version] -%>
-        <%= "=> Incompatible with Rails #{rails_version} (with no new versions):".white.bold %>
-        <%= "These gems will need to be upgraded by us or removed before upgrading to Rails #{rails_version}.".italic %>
-        <%= "This list is likely to contain internal gems, like Cuddlefish.".italic %>
+        <%= Rainbow("=> Incompatible with Rails #{rails_version} (with no new versions):").white.bold %>
+        <%= Rainbow("These gems will need to be upgraded by us or removed before upgrading to Rails #{rails_version}.").italic %>
+        <%= Rainbow("This list is likely to contain internal gems, like Cuddlefish.").italic %>
 
         <% incompatible_gems_by_state[:no_new_version].each do |gem| -%>
         <%= gem_header(gem) %> - new version not found
         <% end -%>
 
         <% end -%>
-        <%= incompatible_gems.length.to_s.red %> gems incompatible with Rails <%= rails_version %>
+        <%= Rainbow(incompatible_gems.length.to_s).red %> gems incompatible with Rails <%= rails_version %>
       ERB
 
       puts ERB.new(template, nil, "-").result(binding)
@@ -68,14 +68,14 @@ module TenYearsRails
         header = "#{_gem.name} #{_gem.version}"
 
         puts <<~MESSAGE
-          #{header.bold.white}: released #{_gem.age} (latest version, #{_gem.latest_version.version}, released #{_gem.latest_version.age})
+          #{Rainbow(header).bold.white}: released #{_gem.age} (latest version, #{_gem.latest_version.version}, released #{_gem.latest_version.age})
         MESSAGE
       end
 
       puts ""
       puts <<~MESSAGE
-        #{"#{sourced_from_git.count}".yellow} gems are sourced from git
-        #{"#{out_of_date_gems.length}".red} of the #{gems.count} gems are out-of-date (#{percentage_out_of_date}%)
+        #{Rainbow(sourced_from_git.count.to_s).yellow} gems are sourced from git
+        #{Rainbow(out_of_date_gems.length.to_s).red} of the #{gems.count} gems are out-of-date (#{percentage_out_of_date}%)
       MESSAGE
     end
   end
