@@ -1,9 +1,8 @@
 PATH
   remote: .
   specs:
-    ten_years_rails (0.2.0)
+    next_rails (1.0.0)
       actionview
-      activesupport
       colorize (>= 0.8.1)
 
 GEM
@@ -45,16 +44,17 @@ GEM
       rspec-core (~> 3.8.0)
       rspec-expectations (~> 3.8.0)
       rspec-mocks (~> 3.8.0)
-    rspec-core (3.8.0)
+    rspec-core (3.8.2)
       rspec-support (~> 3.8.0)
-    rspec-expectations (3.8.2)
+    rspec-expectations (3.8.4)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.8.0)
-    rspec-mocks (3.8.0)
+    rspec-mocks (3.8.1)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.8.0)
-    rspec-support (3.8.0)
+    rspec-support (3.8.2)
     thread_safe (0.3.6)
+    timecop (0.9.1)
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
 
@@ -63,9 +63,10 @@ PLATFORMS
 
 DEPENDENCIES
   bundler (~> 1.16)
+  next_rails!
   rake (~> 10.0)
   rspec (~> 3.0)
-  ten_years_rails!
+  timecop (~> 0.9.1)
 
 BUNDLED WITH
    1.17.2
