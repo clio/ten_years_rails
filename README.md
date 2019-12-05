@@ -80,7 +80,7 @@ next rails s        # Start server using Gemfile.next
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'next_rails'
+gem 'ten_years_rails'
 ```
 
 And then execute:
@@ -89,7 +89,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install next_rails
+    $ gem install ten_years_rails
 
 ## License
 

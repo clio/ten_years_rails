@@ -1,5 +1,5 @@
 require "bundler/setup"
-require "next_rails"
+require "ten_years_rails"
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
