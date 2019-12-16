@@ -53,8 +53,8 @@ module TenYearsRails
     end
 
     def self.gem_header(_gem)
-      header = "#{_gem.name} #{_gem.version}".bold
-      header << " (loaded from git)".magenta if _gem.sourced_from_git?
+      header = Rainbow("#{_gem.name} #{_gem.version}").bold
+      header << Rainbow(" (loaded from git)").magenta if _gem.sourced_from_git?
       header
     end
 
