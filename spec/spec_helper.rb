@@ -1,5 +1,23 @@
 require "bundler/setup"
 require "next_rails"
+if ENV['COVERAGE'] == 'true'
+  require 'simplecov'
+  SimpleCov.start do
+    # Disambiguates individual test runs
+    command_name "Job #{ENV["TEST_ENV_NUMBER"]}" if ENV["TEST_ENV_NUMBER"]
+
+    if ENV['CI']
+      formatter SimpleCov::Formatter::SimpleFormatter
+    else
+      formatter SimpleCov::Formatter::MultiFormatter.new([
+        SimpleCov::Formatter::SimpleFormatter,
+        SimpleCov::Formatter::HTMLFormatter
+      ])
+    end
+
+    track_files "lib/**/*.rb"
+  end
+end
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
