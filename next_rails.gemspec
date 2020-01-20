@@ -6,12 +6,12 @@ require "next_rails/version"
 Gem::Specification.new do |spec|
   spec.name          = "next_rails"
   spec.version       = NextRails::VERSION
-  spec.authors       = ["Jordan Raine", "Ernesto Tagwerker"]
-  spec.email         = ["jnraine@gmail.com", "ernesto@ombulabs.com"]
+  spec.authors       = ["Ernesto Tagwerker", "Luis Sagastume"]
+  spec.email         = ["ernesto@ombulabs.com", "luis@ombulabs.com"]
 
-  spec.summary       = %q{Companion code to Ten Years of Rails Upgrades}
+  spec.summary       = %q{A toolkit to upgrade your next Rails application}
   spec.description   = %q{A set of handy tools to upgrade your Rails application and keep it up to date}
-  spec.homepage      = "https://github.com/fastruby/next_rails"
+  spec.homepage     = "https://github.com/fastruby/next_rails"
   spec.license       = "MIT"
 
   spec.required_ruby_version = ">= 2.3.0"
@@ -27,6 +27,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "bundler", "~> 1.16"
   spec.add_development_dependency "rake", "~> 10.0"
   spec.add_development_dependency "rspec", "~> 3.0"
+  spec.add_development_dependency "simplecov", "~> 0.17.1"
   spec.add_development_dependency "timecop", "~> 0.9.1"
   spec.add_runtime_dependency "actionview"
 end
