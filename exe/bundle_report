@@ -55,5 +55,3 @@ end
 
 # Needs to happen first
 require "bundler/setup"
-
-require "active_support/core_ext/object/acts_like"
