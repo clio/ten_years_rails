@@ -1,10 +1,24 @@
-# Ten Years of Rails Upgrades
+# Next Rails
 
-This is a companion to the "Ten Years of Rails Upgrades" conference talk. You'll find various utilities that we use at Clio to help us prepare for and complete Rails upgrades.
+This is a toolkit to upgrade your next Rails application. It will help you
+set up dual booting, track deprecation warnings, and get a report on outdated
+dependencies for any Rails application.
 
-These scripts are still early days and may not work in every environment or app.
+This project is a fork of [`ten_years_rails`](https://github.com/clio/ten_years_rails)
 
-I wouldn't recommend adding this to your Gemfile long-term. Rather, try out the scripts and use them as a point of reference. Feel free to tweak them to better fit your environment.
+## History
+
+This gem started as a companion to the "[Ten Years of Rails Upgrades](https://www.youtube.com/watch?v=6aCfc0DkSFo)"
+conference talk by Jordan Raine.
+
+> You'll find various utilities that we use at Clio to help us prepare for and
+> complete Rails upgrades.
+
+> These scripts are still early days and may not work in every environment or app.
+
+> I wouldn't recommend adding this to your Gemfile long-term. Rather, try out
+> the scripts and use them as a point of reference. Feel free to tweak them to
+> better fit your environment.
 
 ## Usage
 
