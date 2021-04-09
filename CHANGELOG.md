@@ -1,4 +1,8 @@
-# main [(unreleased)](https://github.com/fastruby/next_rails/compare/v1.0.3...main)
+# main [(unreleased)](https://github.com/fastruby/next_rails/compare/v1.0.4...main)
+
+# v1.0.4 / 2021-04-09 [(commits)](https://github.com/fastruby/next_rails/compare/v1.0.3...v1.0.4)
+
+* [BUGFIX] Fixes issue with `bundle_report` and `actionview` (by [@etagwerker][])
 
 # v1.0.3 / 2021-04-05 [(commits)](https://github.com/fastruby/next_rails/compare/v1.0.2...v1.0.3)
 
