@@ -42,11 +42,7 @@ module NextRails
     end
 
     def age
-      if respond_to?(:time_ago_in_words)
-        "#{time_ago_in_words(created_at)} ago"
-      else
-        created_at.strftime("%b %e, %Y")
-      end
+      created_at.strftime("%b %e, %Y")
     end
 
     def sourced_from_git?
