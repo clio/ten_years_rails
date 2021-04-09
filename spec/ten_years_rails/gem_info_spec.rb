@@ -19,22 +19,10 @@ RSpec.describe NextRails::GemInfo do
       end
     end
 
-    context "when ActionView is available" do
-      it "returns a time ago" do
-        expect(subject.age).to eq("about 12 hours ago")
-      end
-    end
+    let(:result) { now.strftime("%b %e, %Y") }
 
-    context "when ActionView is not available" do
-      let(:result) { now.strftime("%b %e, %Y") }
-
-      before do
-        subject.instance_eval('undef :time_ago_in_words')
-      end
-
-      it "returns a date" do
-        expect(subject.age).to eq(result)
-      end
+    it "returns a date" do
+      expect(subject.age).to eq(result)
     end
   end
 end
