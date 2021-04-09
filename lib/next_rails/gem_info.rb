@@ -1,15 +1,5 @@
-begin
-  require "action_view"
-rescue LoadError
-  puts "ActionView not available"
-end
-
 module NextRails
   class GemInfo
-    if defined?(ActionView)
-      include ActionView::Helpers::DateHelper
-    end
-
     class NullGemInfo < GemInfo
       def initialize; end
 
