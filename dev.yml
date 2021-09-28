@@ -1,0 +1,9 @@
+version: 1.1
+
+setup:
+  ruby: 2.6.6
+  bundler: 1.17.2
+
+commands:
+  test:
+    - "bundle exec rspec spec"
