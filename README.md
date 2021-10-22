@@ -83,7 +83,7 @@ Right now, the path to the shitlist is hardcoded so make sure you store yours at
 This command helps you dual-boot your application.
 
 ```bash
-next --init         # Create Gemfile.next
+next --init         # Create Gemfile.next and Gemfile.next.lock
 vim Gemfile         # Tweak your dependencies conditionally using `next?`
 next bundle install # Install new gems
 next rails s        # Start server using Gemfile.next
@@ -104,6 +104,12 @@ And then execute:
 Or install it yourself as:
 
     $ gem install next_rails
+
+## Setup
+
+Execute:
+
+    $ next --init
 
 ## License
 
