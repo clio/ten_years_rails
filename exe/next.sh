@@ -10,6 +10,13 @@ STRING
   mv Gemfile.tmp Gemfile
 
   ln -s Gemfile Gemfile.next
+
+  # Initialize the Gemfile.next.lock
+  # Prevents major version jumps when we start without a Gemfile.next.lock
+  if [ -f "Gemfile.lock" ] && [ ! -f "Gemfile.next.lock" ]; then
+    cp Gemfile.lock Gemfile.next.lock
+  fi
+
   echo <<-MESSAGE
 Created Gemfile.next (a symlink to your Gemfile). Your Gemfile has been modified to support dual-booting!
 
