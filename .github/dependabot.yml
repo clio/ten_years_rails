@@ -1,4 +1,11 @@
 version: 2
+registries:
+  rubygems-jfrog:
+    type: rubygems-server
+    url: https://clio.jfrog.io/clio/api/gems/product-gem-prod/
+    username: ${{secrets.ARTIFACTORY_USERNAME}}
+    password: ${{secrets.ARTIFACTORY_API_KEY}}
+
 updates:
   - package-ecosystem: "bundler"
     directory: "/"
