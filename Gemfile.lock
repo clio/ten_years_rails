@@ -66,11 +66,11 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bundler (~> 1.16)
+  bundler
   rake (~> 13.0)
   rspec (~> 3.0)
   ten_years_rails!
   timecop (~> 0.9.1)
 
 BUNDLED WITH
-   1.17.2
+   2.2.28
