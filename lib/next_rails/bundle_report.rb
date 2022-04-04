@@ -58,6 +58,16 @@ module NextRails
       header
     end
 
+    def self.ruby_check(rails_version)
+      ruby_rails_hash = { "5.2.0": { minimum_ruby_version: "2.3.0" }}
+      if ruby_rails_hash[:"#{rails_version[:rails_version]}"]
+        ruby_version = ruby_rails_hash[:"#{rails_version[:rails_version]}"]
+        puts "Minimum ruby version is: #{ruby_version[:minimum_ruby_version]}"
+      else
+        puts "Could not find a compatible ruby version"
+      end
+    end
+
     def self.outdated
       gems = NextRails::GemInfo.all
       out_of_date_gems = gems.reject(&:up_to_date?).sort_by(&:created_at)

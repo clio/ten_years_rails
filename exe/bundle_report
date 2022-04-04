@@ -47,6 +47,7 @@ at_exit do
   report_type = ARGV.first
 
   case report_type
+  when "ruby_check" then NextRails::BundleReport.ruby_check(rails_version: options.fetch(:rails_version))
   when "outdated" then NextRails::BundleReport.outdated
   else
     NextRails::BundleReport.compatibility(rails_version: options.fetch(:rails_version, "5.0"), include_rails_gems: options.fetch(:include_rails_gems, false))
