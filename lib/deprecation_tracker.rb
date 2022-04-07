@@ -27,6 +27,25 @@ class DeprecationTracker
     end
   end
 
+  module MinitestExtension
+    def self.new(deprecation_tracker)
+      @@deprecation_tracker = deprecation_tracker
+
+      Module.new do
+        def before_setup
+          test_file_name = method(name).source_location.first.to_s
+          @@deprecation_tracker.bucket = test_file_name.gsub(Rails.root.to_s, ".")
+          super
+        end
+      
+        def after_teardown
+          super
+          @@deprecation_tracker.bucket = nil
+        end
+      end
+    end
+  end
+
   # There are two forms of the `warn` method: one for class Kernel and one for instances of Kernel (i.e., every Object)
   Object.prepend(KernelWarnTracker)
 
@@ -39,15 +58,21 @@ class DeprecationTracker
     end
   end
 
-  def self.track_rspec(rspec_config, opts = {})
+  def self.init_tracker(opts = {})
     shitlist_path = opts[:shitlist_path]
     mode = opts[:mode]
     transform_message = opts[:transform_message]
-    deprecation_tracker = DeprecationTracker.new(shitlist_path, transform_message)
+    deprecation_tracker = DeprecationTracker.new(shitlist_path, transform_message, mode)
     if defined?(ActiveSupport)
       ActiveSupport::Deprecation.behavior << -> (message, _callstack, _deprecation_horizon, _gem_name) { deprecation_tracker.add(message) }
     end
     KernelWarnTracker.callbacks << -> (message) { deprecation_tracker.add(message) }
+
+    deprecation_tracker
+  end
+
+  def self.track_rspec(rspec_config, opts = {})
+    deprecation_tracker = init_tracker(opts)
 
     rspec_config.around do |example|
       deprecation_tracker.bucket = example.metadata.fetch(:rerun_file_path)
@@ -60,21 +85,27 @@ class DeprecationTracker
     end
 
     rspec_config.after(:suite) do
-      if mode == "save"
-        deprecation_tracker.save
-      elsif mode == "compare"
-        deprecation_tracker.compare
-      end
+      deprecation_tracker.after_run
     end
   end
 
-  attr_reader :deprecation_messages, :shitlist_path, :transform_message
-  attr_reader :bucket
+  def self.track_minitest(opts = {})
+    tracker = init_tracker(opts)
 
-  def initialize(shitlist_path, transform_message = nil)
+    Minitest.after_run do
+      tracker.after_run
+    end
+
+    ActiveSupport::TestCase.include(MinitestExtension.new(tracker))
+  end
+
+  attr_reader :deprecation_messages, :shitlist_path, :transform_message, :bucket, :mode
+
+  def initialize(shitlist_path, transform_message = nil, mode = :save)
     @shitlist_path = shitlist_path
     @transform_message = transform_message || -> (message) { message }
     @deprecation_messages = {}
+    @mode = mode.to_sym
   end
 
   def add(message)
@@ -86,6 +117,14 @@ class DeprecationTracker
   def bucket=(value)
     @bucket = value
     @deprecation_messages[value] ||= [] unless value.nil?
+  end
+
+  def after_run
+    if mode == :save
+      save
+    elsif mode == :compare
+      compare
+    end
   end
 
   def compare

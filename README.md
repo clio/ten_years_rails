@@ -54,7 +54,18 @@ RSpec.configure do |config|
 end
 ```
 
-We don't use MiniTest, so there isn't a prebuilt config for it but I suspect it's pretty similar to `DeprecationTracker.track_rspec`.
+If using minitest, add this somewhere close to the top of your `test_helper.rb`:
+
+```ruby
+# Tracker deprecation messages in each file
+if ENV["DEPRECATION_TRACKER"]
+  DeprecationTracker.track_minitest(
+    shitlist_path: "test/support/deprecation_warning.shitlist.json",
+    mode: ENV["DEPRECATION_TRACKER"],
+    transform_message: -> (message) { message.gsub("#{Rails.root}/", "") }
+  )
+end
+```
 
 Once you have that, you can start using deprecation tracking in your tests:
 
@@ -121,7 +132,7 @@ Execute:
     $ next --init
 
 Init will create a Gemfile.next and an initialized Gemfile.next.lock.
-The Gemfile.next.lock is initialized with the contents of your existing 
+The Gemfile.next.lock is initialized with the contents of your existing
 Gemfile.lock lock file. We initialize the Gemfile.next.lock to prevent
 major version jumps when running the next version of Rails.
 
