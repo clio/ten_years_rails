@@ -67,6 +67,8 @@ if ENV["DEPRECATION_TRACKER"]
 end
 ```
 
+> Keep in mind this is currently not compatible with the `minitest/parallel_fork` gem!
+
 Once you have that, you can start using deprecation tracking in your tests:
 
 ```bash
