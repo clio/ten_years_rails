@@ -58,7 +58,7 @@ module NextRails
       header
     end
 
-    def self.ruby_check(rails_version)
+    def self.compatible_ruby_version(rails_version)
       ruby_rails_hash = { "5.2.0": { minimum_ruby_version: "2.3.0" }}
       if ruby_rails_hash[:"#{rails_version[:rails_version]}"]
         ruby_version = ruby_rails_hash[:"#{rails_version[:rails_version]}"]
