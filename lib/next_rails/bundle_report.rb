@@ -2,6 +2,7 @@ require "colorize"
 require "cgi"
 require "erb"
 require "json"
+require "rails_ruby_version_map"
 
 module NextRails
   class BundleReport
@@ -59,10 +60,10 @@ module NextRails
     end
 
     def self.compatible_ruby_version(rails_version)
-      ruby_rails_hash = { "5.2.0": { minimum_ruby_version: "2.3.0" }}
-      if ruby_rails_hash[:"#{rails_version[:rails_version]}"]
-        ruby_version = ruby_rails_hash[:"#{rails_version[:rails_version]}"]
-        puts "Minimum ruby version is: #{ruby_version[:minimum_ruby_version]}"
+      puts '2'*10
+      if RAILS_RUBY_VERSION_MAP["#{rails_version[:rails_version]}"]
+        ruby_version = RAILS_RUBY_VERSION_MAP["#{rails_version[:rails_version]}"]
+        puts "Minimum ruby version is: #{ruby_version}"
       else
         puts "Could not find a compatible ruby version"
       end
