@@ -60,10 +60,10 @@ module NextRails
     end
 
     def self.compatible_ruby_version(rails_version)
-      puts '2'*10
       if RAILS_RUBY_VERSION_MAP["#{rails_version[:rails_version]}"]
         ruby_version = RAILS_RUBY_VERSION_MAP["#{rails_version[:rails_version]}"]
         puts "Minimum ruby version is: #{ruby_version}"
+        ruby_version
       else
         puts "Could not find a compatible ruby version"
       end
