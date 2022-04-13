@@ -17,6 +17,12 @@ at_exit do
       Examples:
         #{$0} compatibility --rails-version 5.0
         #{$0} outdated
+
+      ruby_check To find a compatible ruby version for the target rails version
+
+      Examples:
+        #{$0} ruby_check --rails-version 7.0.0
+
     EOS
 
     opts.separator ""
