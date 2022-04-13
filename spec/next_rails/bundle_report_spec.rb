@@ -12,7 +12,7 @@ RSpec.describe NextRails::BundleReport do
     end
     
     context "when rails_version is an invalid one" do
-      it "returns the correct ruby version" do
+      it "returns nil for ruby version" do
         rails_version = { rails_version: "0.0.0" }
         ruby_version = NextRails::BundleReport.compatible_ruby_version(rails_version)
         expect(ruby_version).to eq(nil)
