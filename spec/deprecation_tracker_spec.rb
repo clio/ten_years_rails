@@ -220,6 +220,31 @@ RSpec.describe DeprecationTracker do
     end
   end
 
+  describe "#after_run" do
+    let(:shitlist_path) { "some_path" }
+
+    it "calls save if in save mode" do
+      tracker = DeprecationTracker.new(shitlist_path, nil, :save)
+      expect(tracker).to receive(:save)
+      expect(tracker).not_to receive(:compare)
+      tracker.after_run
+    end
+
+    it "calls compare if in compare mode" do
+      tracker = DeprecationTracker.new(shitlist_path, nil, "compare")
+      expect(tracker).not_to receive(:save)
+      expect(tracker).to receive(:compare)
+      tracker.after_run
+    end
+
+    it "does not save nor compare if mode is invalid" do
+      tracker = DeprecationTracker.new(shitlist_path, nil, "random_stuff")
+      expect(tracker).not_to receive(:save)
+      expect(tracker).not_to receive(:compare)
+      tracker.after_run
+    end
+  end
+
   describe DeprecationTracker::KernelWarnTracker do
     it "captures Kernel#warn" do
       warn_messages = []
