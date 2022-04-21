@@ -6,4 +6,4 @@ Description:
 
 Please include a summary of the change and which issue is fixed or which feature is introduced. If changes to the behavior are made, clearly describe what changes.
 
-I will abide by the [code of conduct](CODE_OF_CONDUCT.md).
+I will abide by the [code of conduct](https://github.com/fastruby/next_rails/blob/main/CODE_OF_CONDUCT.md).
