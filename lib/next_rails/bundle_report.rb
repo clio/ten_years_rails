@@ -8,22 +8,19 @@ module NextRails
     def self.compatibility(rails_version:, include_rails_gems:)
       incompatible_gems = NextRails::GemInfo.all.reject do |gem|
         gem.compatible_with_rails?(rails_version: rails_version) || (!include_rails_gems && gem.from_rails?)
-      end.sort_by do |gem|
-        [
-          gem.latest_version.compatible_with_rails?(rails_version: rails_version) ? 0 : 1,
-          gem.name
-        ].join("-")
-      end
+      end.sort_by { |gem| gem.name }
+
+      incompatible_gems.each { |gem| gem.find_latest_compatible(rails_version: rails_version) }
 
       incompatible_gems_by_state = incompatible_gems.group_by { |gem| gem.state(rails_version) }
 
       template = <<~ERB
-        <% if incompatible_gems_by_state[:latest_compatible] -%>
+        <% if incompatible_gems_by_state[:found_compatible] -%>
         <%= "=> Incompatible with Rails #{rails_version} (with new versions that are compatible):".white.bold %>
         <%= "These gems will need to be upgraded before upgrading to Rails #{rails_version}.".italic %>
 
-        <% incompatible_gems_by_state[:latest_compatible].each do |gem| -%>
-        <%= gem_header(gem) %> - upgrade to <%= gem.latest_version.version %>
+        <% incompatible_gems_by_state[:found_compatible].each do |gem| -%>
+        <%= gem_header(gem) %> - upgrade to <%= gem.latest_compatible_version.version %>
         <% end -%>
 
         <% end -%>
