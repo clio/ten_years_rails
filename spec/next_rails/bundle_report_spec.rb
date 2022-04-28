@@ -7,7 +7,15 @@ RSpec.describe NextRails::BundleReport do
       it "returns the correct ruby version" do
         rails_version = { rails_version: "7.0.0" }
         ruby_version = NextRails::BundleReport.compatible_ruby_version(rails_version)
-        expect(ruby_version).to eq("2.7.0")
+        expect(ruby_version).to eq(">= 2.7.0")
+      end
+    end
+
+    context "when partial rails_version is passed as argument" do
+      it "returns the correct ruby version" do
+        rails_version = { rails_version: "7.0" }
+        ruby_version = NextRails::BundleReport.compatible_ruby_version(rails_version)
+        expect(ruby_version).to eq(">= 2.7.0")
       end
     end
     
