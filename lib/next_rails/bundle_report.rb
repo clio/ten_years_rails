@@ -70,7 +70,7 @@ module NextRails
       all_versions_res.each { |rv| all_versions << rv['number'] }
 
       rv = rails_version[:rails_version]
-      matched_versions = all_versions.select { |h| h.match(rv) && h.start_with?(rv) }
+      matched_versions = all_versions.select { |h| h.start_with?(rv) }
 
       # the list can either have the exact version or the latest version in the series of versions
       # you are looking at
@@ -79,7 +79,7 @@ module NextRails
       # the ruby version for it bu tif you had passed "6.1", then it will look for the
       # latest version matching "6.1" which is "6.1.4.2" in this case and will return ruby
       # version for it.
-      exact_version = matched_versions.include?(rv) ? rv: matched_versions[0]
+      exact_version = matched_versions.include?(rv) ? rv : matched_versions[0]
 
       if exact_version
         uri = URI("https://rubygems.org/api/v2/rubygems/rails/versions/#{exact_version}.json")
@@ -91,7 +91,7 @@ module NextRails
 
 
       if ruby_version
-        puts "Recommended ruby version is: #{ruby_version} for matched rails version #{exact_version}"
+        puts "The required ruby version is #{ruby_version} for matched rails version #{exact_version}"
         ruby_version
       else
         puts "Could not find a compatible ruby version"
