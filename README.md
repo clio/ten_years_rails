@@ -1,3 +1,5 @@
+🚩 *Clio is not actively fixing any CVEs in this repository. Please use accordingly.* 🚩
+
 # Ten Years of Rails Upgrades
 
 This is a companion to the "Ten Years of Rails Upgrades" conference talk. You'll find various utilities that we use at Clio to help us prepare for and complete Rails upgrades.
