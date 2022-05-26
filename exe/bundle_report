@@ -17,6 +17,12 @@ at_exit do
       Examples:
         #{$0} compatibility --rails-version 5.0
         #{$0} outdated
+
+      ruby_check To find a compatible ruby version for the target rails version
+
+      Examples:
+        #{$0} ruby_check --rails-version 7.0.0
+
     EOS
 
     opts.separator ""
@@ -47,6 +53,7 @@ at_exit do
   report_type = ARGV.first
 
   case report_type
+  when "ruby_check" then NextRails::BundleReport.compatible_ruby_version(rails_version: options.fetch(:rails_version))
   when "outdated" then NextRails::BundleReport.outdated
   else
     NextRails::BundleReport.compatibility(rails_version: options.fetch(:rails_version, "5.0"), include_rails_gems: options.fetch(:include_rails_gems, false))

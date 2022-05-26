@@ -34,6 +34,8 @@ bundle_report outdated | head -n 5
 # Show gems that don't work with Rails 5.2.0
 bundle_report compatibility --rails-version=5.2.0
 bundle_report --help
+# Find minimum compatible ruby version with Rails 7.0.0
+bundle_report ruby_check --rails-version=7.0.0
 ```
 
 ### Deprecation tracking

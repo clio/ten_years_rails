@@ -2,6 +2,7 @@ require "colorize"
 require "cgi"
 require "erb"
 require "json"
+require "net/http"
 
 module NextRails
   class BundleReport
@@ -53,6 +54,45 @@ module NextRails
       header = "#{_gem.name} #{_gem.version}".bold
       header << " (loaded from git)".magenta if _gem.sourced_from_git?
       header
+    end
+
+    def self.compatible_ruby_version(rails_version)
+      # find all the versions of rails gem
+      uri = URI('https://rubygems.org/api/v1/versions/rails.json')
+      res = Net::HTTP.get_response(uri)
+      all_versions_res = JSON.parse(res.body)
+
+      # push all the versions in an array
+      all_versions = []
+      all_versions_res.each { |rv| all_versions << rv['number'] }
+
+      rv = rails_version[:rails_version]
+      matched_versions = all_versions.select { |h| h.start_with?(rv) }
+
+      # the list can either have the exact version or the latest version in the series of versions
+      # you are looking at
+      # ex: matched_versions = ["6.1.4.2", "6.1.4.1", "6.1.4"]
+      # if you have passed "6.1.4" and the list has the exact version, it will match and send
+      # the ruby version for it bu tif you had passed "6.1", then it will look for the
+      # latest version matching "6.1" which is "6.1.4.2" in this case and will return ruby
+      # version for it.
+      exact_version = matched_versions.include?(rv) ? rv : matched_versions[0]
+
+      if exact_version
+        uri = URI("https://rubygems.org/api/v2/rubygems/rails/versions/#{exact_version}.json")
+        res = Net::HTTP.get_response(uri)
+        ruby_version = JSON.parse(res.body)["ruby_version"]
+      else
+        ruby_version = nil
+      end
+
+
+      if ruby_version
+        puts "The required ruby version is #{ruby_version} for matched rails version #{exact_version}"
+        ruby_version
+      else
+        puts "Could not find a compatible ruby version"
+      end
     end
 
     def self.outdated
