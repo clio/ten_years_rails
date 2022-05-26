@@ -1,5 +1,7 @@
 # main [(unreleased)](https://github.com/fastruby/next_rails/compare/v1.0.4...main)
 
+* [FEATURE: Try to find the latest **compatible** version of a gem if the latest version is not compatible with the desired Rails version when checking compatibility](https://github.com/fastruby/next_rails/pull/49)
+
 # v1.0.5 / 2022-03-29 [(commits)](https://github.com/fastruby/next_rails/compare/v1.0.4...v1.0.5)
 
 * [FEATURE: Initialize the Gemfile.next.lock to avoid major version jumps when used without an initial Gemfile.next.lock](https://github.com/fastruby/next_rails/pull/25)
@@ -14,6 +16,7 @@
 
 * [BUGFIX: Update README.md to better document this `ten_years_rails` fork](https://github.com/fastruby/next_rails/pull/11)
 * [BUGFIX: Make ActionView an optional dependency](https://github.com/fastruby/next_rails/pull/6)
+
 # v1.0.2 / 2020-01-20
 
 # v1.0.1 / 2019-07-26
