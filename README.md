@@ -140,6 +140,33 @@ The Gemfile.next.lock is initialized with the contents of your existing
 Gemfile.lock lock file. We initialize the Gemfile.next.lock to prevent
 major version jumps when running the next version of Rails.
 
+## Contributing
+
+Have a fix for a problem you've been running into or an idea for a new feature you think would be useful? Want to see how you can support `next_rails`?
+
+Take a look at the [Contributing document](CONTRIBUTING.md) for instructions to set up the repo on your machine!
+
+## Releases
+
+`next_rails` adheres to [semver](https://semver.org). So given a version number MAJOR.MINOR.PATCH, we will increment the:
+
+1. MAJOR version when you make incompatible API changes,
+2. MINOR version when you add functionality in a backwards compatible manner, and
+3. PATCH version when you make backwards compatible bug fixes.
+
+Here are the steps to release a new version:
+
+1. Update the `version.rb` file with the proper version number
+2. Update `CHANGELOG.md` to have the right headers
+3. Commit your changes to a `release/v-1-1-0` branch
+4. Push your changes and submit a pull request
+5. Merge your pull request to the `main` branch
+6. Git tag the latest version of the `main` branch (`git tag v1.1.0`)
+7. Push tags to GitHub (`git push --tags`)
+8. Build the gem (`gem build next_rails.gemspec`)
+9. Push the .gem package to Rubygems.org (`gem push next_rails-1.1.0.gem`)
+10. You are all done!
+
 ## License
 
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
