@@ -2,6 +2,23 @@
 
 * [FEATURE: Try to find the latest **compatible** version of a gem if the latest version is not compatible with the desired Rails version when checking compatibility](https://github.com/fastruby/next_rails/pull/49)
 
+* [FEATURE: Added option --version to get the version of the gem being used](https://github.com/fastruby/next_rails/pull/38)
+
+* [Added github action workflow](https://github.com/fastruby/next_rails/pull/40)
+
+* [FEATURE: Add support to use DeprecationTracker with Minitest](Add support to use DeprecationTracker with Minitest)
+
+* [FEATURE: Add dependabot](https://github.com/fastruby/next_rails/pull/41)
+
+* [DOCUMENTATION: Update the code of conduct link in PR template](https://github.com/fastruby/next_rails/pull/46)
+
+* [DOCUMENTATION: Add FEATURE REQUEST and BUG REPORT templates ](https://github.com/fastruby/next_rails/pull/48)
+
+* [BUGFIX: Make behavior arguments optional](https://github.com/fastruby/next_rails/pull/44)
+
+* [FEATURE: Command line option to check for recommended ruby version for the desired Rails version](https://github.com/fastruby/next_rails/pull/39)
+
+
 # v1.0.5 / 2022-03-29 [(commits)](https://github.com/fastruby/next_rails/compare/v1.0.4...v1.0.5)
 
 * [FEATURE: Initialize the Gemfile.next.lock to avoid major version jumps when used without an initial Gemfile.next.lock](https://github.com/fastruby/next_rails/pull/25)
