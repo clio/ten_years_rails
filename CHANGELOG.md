@@ -1,6 +1,7 @@
 # main [(unreleased)](https://github.com/fastruby/next_rails/compare/v1.0.4...main)
 
 * [FEATURE: Try to find the latest **compatible** version of a gem if the latest version is not compatible with the desired Rails version when checking compatibility](https://github.com/fastruby/next_rails/pull/49)
+* [FEATURE: Better documentation for contributing and releasing versions of this gem](https://github.com/fastruby/next_rails/pull/53)
 
 # v1.0.5 / 2022-03-29 [(commits)](https://github.com/fastruby/next_rails/compare/v1.0.4...v1.0.5)
 
