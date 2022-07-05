@@ -6,7 +6,7 @@ require "net/http"
 
 module NextRails
   class BundleReport
-    def self.compatibility(rails_version:, include_rails_gems:)
+    def self.compatibility(rails_version: nil, include_rails_gems: nil)
       incompatible_gems = NextRails::GemInfo.all.reject do |gem|
         gem.compatible_with_rails?(rails_version: rails_version) || (!include_rails_gems && gem.from_rails?)
       end.sort_by { |gem| gem.name }
