@@ -202,7 +202,12 @@ class DeprecationTracker
       hash[bucket] = messages.sort
     end
 
-    normalized.reject {|_key, value| value.empty? }.sort_by {|key, _value| key }.to_h
+    # not using `to_h` here to support older ruby versions
+    {}.tap do |h|
+      normalized.reject {|_key, value| value.empty? }.sort_by {|key, _value| key }.each do |k ,v|
+        h[k] = v
+      end
+    end
   end
 
   def read_shitlist
