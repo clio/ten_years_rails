@@ -1,7 +1,7 @@
 # main [(unreleased)](https://github.com/fastruby/next_rails/compare/v1.0.4...main)
 
 * [FEATURE: Better documentation for contributing and releasing versions of this gem](https://github.com/fastruby/next_rails/pull/53)
-* [FEATURE: `bundle_report outdated` outputs in JSON format when passed optional argument](https://github.com/fastruby/next_rails/pull/35)
+* [FEATURE: `bundle_report outdated` outputs in JSON format when passed optional argument](https://github.com/fastruby/next_rails/pull/61)
 
 # v1.1.0 / 2022-06-30 [(commits)](https://github.com/fastruby/next_rails/compare/v1.0.5...v1.1.0)
 
