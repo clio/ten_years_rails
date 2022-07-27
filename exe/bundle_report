@@ -38,7 +38,7 @@ at_exit do
     end
 
     opts.on("--json", "Output JSON in outdated report (defaults to false)") do
-      options[:json] = true
+      options[:format] = 'json'
     end
 
     opts.on_tail("-h", "--help", "Show this message") do
@@ -59,7 +59,7 @@ at_exit do
 
   case report_type
   when "ruby_check" then NextRails::BundleReport.compatible_ruby_version(rails_version: options.fetch(:rails_version))
-  when "outdated" then NextRails::BundleReport.outdated(options.fetch(:json, false))
+  when "outdated" then NextRails::BundleReport.outdated(options.fetch(:format, nil))
   else
     NextRails::BundleReport.compatibility(rails_version: options.fetch(:rails_version, "5.0"), include_rails_gems: options.fetch(:include_rails_gems, false))
   end

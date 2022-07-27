@@ -95,12 +95,12 @@ module NextRails
       end
     end
 
-    def self.outdated(output_in_json)
+    def self.outdated(format = nil)
       gems = NextRails::GemInfo.all
       out_of_date_gems = gems.reject(&:up_to_date?).sort_by(&:created_at)
       sourced_from_git = gems.select(&:sourced_from_git?)
 
-      if output_in_json
+      if format == 'json'
         output_to_json(out_of_date_gems, gems.count, sourced_from_git.count)
       else
         output_to_stdout(out_of_date_gems, gems.count, sourced_from_git.count)

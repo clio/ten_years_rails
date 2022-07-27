@@ -27,7 +27,7 @@ RSpec.describe NextRails::BundleReport do
     end
 
     context 'when writing human-readable output' do
-      subject { described_class.outdated(false) }
+      subject { described_class.outdated }
 
       it 'invokes $stdout.puts properly', :aggregate_failures do
         allow($stdout)
