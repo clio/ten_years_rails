@@ -88,6 +88,15 @@ module NextRails
       end
     end
 
+    def latest_version
+      latest_gem_specification = Gem.latest_spec_for(name)
+      return NullGemInfo.new unless latest_gem_specification
+
+      GemInfo.new(latest_gem_specification)
+    rescue
+      NullGemInfo.new
+    end
+
     def compatible_with_rails?(rails_version:)
       unsatisfied_rails_dependencies(rails_version: rails_version).empty?
     end
