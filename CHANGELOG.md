@@ -1,5 +1,6 @@
 # main [(unreleased)](https://github.com/fastruby/next_rails/compare/v1.0.4...main)
 
+* [BUGFIX: SimpleCov was not reporting accurately due to a bug in the spec helper code](https://github.com/fastruby/next_rails/pull/66)
 * [FEATURE: Better documentation for contributing and releasing versions of this gem](https://github.com/fastruby/next_rails/pull/53)
 
 # v1.1.0 / 2022-06-30 [(commits)](https://github.com/fastruby/next_rails/compare/v1.0.5...v1.1.0)
