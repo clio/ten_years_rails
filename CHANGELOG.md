@@ -1,4 +1,6 @@
-# main [(unreleased)](https://github.com/fastruby/next_rails/compare/v1.1.0...main)
+# main [(unreleased)](https://github.com/fastruby/next_rails/compare/v1.2.0...main)
+
+# v1.2.0 / 2022-08-12 [(commits)](https://github.com/fastruby/next_rails/compare/v1.1.0...v1.2.0)
 
 - [FEATURE: Support Ruby versions as old as Ruby 2.0](https://github.com/fastruby/next_rails/pull/54)
 
