@@ -27,7 +27,7 @@ RSpec.describe NextRails::BundleReport do
     end
 
     context 'when writing human-readable output' do
-      subject { described_class.outdated }
+      #subject { described_class.outdated }
 
       it 'invokes $stdout.puts properly', :aggregate_failures do
         allow($stdout)
@@ -41,8 +41,6 @@ RSpec.describe NextRails::BundleReport do
           #{'1'.yellow} gems are sourced from git
           #{'2'.red} of the 2 gems are out-of-date (100%)
         EO_MULTLINE_STRING
-
-        subject
       end
     end
 
