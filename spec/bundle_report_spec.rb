@@ -37,7 +37,7 @@ RSpec.describe NextRails::BundleReport do
           .to receive(:puts)
           .with("#{'bravo 0.2.0'.bold.white}: released #{bravo_age} (latest version, 0.2.2, released #{charlie_age})\n")
         allow($stdout).to receive(:puts).with('')
-        allow($stdout).to receive(:puts).with(<<~EO_MULTLINE_STRING)
+        allow($stdout).to receive(:puts).with(<<-EO_MULTLINE_STRING)
           #{'1'.yellow} gems are sourced from git
           #{'2'.red} of the 2 gems are out-of-date (100%)
         EO_MULTLINE_STRING
