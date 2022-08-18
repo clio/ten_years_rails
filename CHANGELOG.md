@@ -1,5 +1,9 @@
 # main [(unreleased)](https://github.com/fastruby/next_rails/compare/v1.2.0...main)
 
+- [BUGFIX: SimpleCov was not reporting accurately due to a bug in the spec helper code](https://github.com/fastruby/next_rails/pull/66)
+
+- [FEATURE: Better documentation for contributing and releasing versions of this gem](https://github.com/fastruby/next_rails/pull/53)
+
 # v1.2.0 / 2022-08-12 [(commits)](https://github.com/fastruby/next_rails/compare/v1.1.0...v1.2.0)
 
 - [FEATURE: Support Ruby versions as old as Ruby 2.0](https://github.com/fastruby/next_rails/pull/54)
