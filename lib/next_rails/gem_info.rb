@@ -97,7 +97,7 @@ module NextRails
       NullGemInfo.new
     end
 
-    def compatible_with_rails?(rails_version:)
+    def compatible_with_rails?(rails_version: nil)
       unsatisfied_rails_dependencies(rails_version: rails_version).empty?
     end
 
