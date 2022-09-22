@@ -4,6 +4,8 @@
 
 - [FEATURE: Better documentation for contributing and releasing versions of this gem](https://github.com/fastruby/next_rails/pull/53)
 
+- [BUGFIX: bundle_report outdated was giving an exception due to missing method latest_version](https://github.com/fastruby/next_rails/pull/62)
+
 # v1.2.0 / 2022-08-12 [(commits)](https://github.com/fastruby/next_rails/compare/v1.1.0...v1.2.0)
 
 - [FEATURE: Support Ruby versions as old as Ruby 2.0](https://github.com/fastruby/next_rails/pull/54)
