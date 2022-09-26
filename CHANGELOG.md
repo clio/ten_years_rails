@@ -1,4 +1,6 @@
-# main [(unreleased)](https://github.com/fastruby/next_rails/compare/v1.2.0...main)
+# main [(unreleased)](https://github.com/fastruby/next_rails/compare/v1.2.1...main)
+
+# v1.2.1 / 2022-09-26 [(commits)](https://github.com/fastruby/next_rails/compare/v1.2.0...v1.2.1)
 
 - [BUGFIX: SimpleCov was not reporting accurately due to a bug in the spec helper code](https://github.com/fastruby/next_rails/pull/66)
 
