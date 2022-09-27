@@ -1,4 +1,5 @@
 # main [(unreleased)](https://github.com/fastruby/next_rails/compare/v1.2.1...main)
+* [CHORE: Added updated templates for bug fixes, feature requests and pull requests](https://github.com/fastruby/next_rails/pull/64) as per [this RFC](https://github.com/fastruby/RFCs/blob/main/2021-10-13-github-templates.md)
 
 # v1.2.1 / 2022-09-26 [(commits)](https://github.com/fastruby/next_rails/compare/v1.2.0...v1.2.1)
 
