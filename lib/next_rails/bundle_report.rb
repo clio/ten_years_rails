@@ -5,8 +5,10 @@ require "json"
 require "net/http"
 
 module NextRails
-  class BundleReport
-    def self.compatibility(rails_version: nil, include_rails_gems: nil)
+  module BundleReport
+    extend self
+
+    def compatibility(rails_version: nil, include_rails_gems: nil)
       incompatible_gems = NextRails::GemInfo.all.reject do |gem|
         gem.compatible_with_rails?(rails_version: rails_version) || (!include_rails_gems && gem.from_rails?)
       end.sort_by { |gem| gem.name }
@@ -50,13 +52,13 @@ module NextRails
       puts ERB.new(template, nil, "-").result(binding)
     end
 
-    def self.gem_header(_gem)
+    def gem_header(_gem)
       header = "#{_gem.name} #{_gem.version}".bold
       header << " (loaded from git)".magenta if _gem.sourced_from_git?
       header
     end
 
-    def self.compatible_ruby_version(rails_version)
+    def compatible_ruby_version(rails_version)
       # find all the versions of rails gem
       uri = URI('https://rubygems.org/api/v1/versions/rails.json')
       res = Net::HTTP.get_response(uri)
@@ -95,7 +97,7 @@ module NextRails
       end
     end
 
-    def self.outdated(format = nil)
+    def outdated(format = nil)
       gems = NextRails::GemInfo.all
       out_of_date_gems = gems.reject(&:up_to_date?).sort_by(&:created_at)
       sourced_from_git = gems.select(&:sourced_from_git?)
@@ -107,12 +109,12 @@ module NextRails
       end
     end
 
-    def self.output_to_json(out_of_date_gems, total_gem_count, sourced_from_git_count)
+    def output_to_json(out_of_date_gems, total_gem_count, sourced_from_git_count)
       obj = build_json(out_of_date_gems, total_gem_count, sourced_from_git_count)
       puts JSON.pretty_generate(obj)
     end
 
-    def self.build_json(out_of_date_gems, total_gem_count, sourced_from_git_count)
+    def build_json(out_of_date_gems, total_gem_count, sourced_from_git_count)
       output = Hash.new { [] }
       out_of_date_gems.each do |gem|
         output[:outdated_gems] += [
@@ -134,7 +136,7 @@ module NextRails
       )
     end
 
-    def self.output_to_stdout(out_of_date_gems, total_gem_count, sourced_from_git_count)
+    def output_to_stdout(out_of_date_gems, total_gem_count, sourced_from_git_count)
       out_of_date_gems.each do |gem|
         header = "#{gem.name} #{gem.version}"
 
