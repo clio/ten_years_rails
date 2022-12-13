@@ -77,14 +77,14 @@ module NextRails
     end
 
     def state(rails_version)
-      return :compatible if compatible_with_rails?(rails_version: rails_version)
-
-      if latest_compatible_version.nil?
-        :incompatible
-      elsif latest_compatible_version.version == "NOT FOUND"
+      if compatible_with_rails?(rails_version: rails_version)
+        :compatible
+      elsif latest_compatible_version && latest_compatible_version.version == "NOT FOUND"
         :no_new_version
-      else
+      elsif latest_compatible_version
         :found_compatible
+      else
+        :incompatible
       end
     end
 
