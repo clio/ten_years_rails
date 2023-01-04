@@ -122,7 +122,7 @@ next rails s        # Start server using Gemfile.next
 
 ## Installation
 
-Add this line to your application's Gemfile:
+Add this line to your application's Gemfile (if you add this gem to a group, make sure it is the test env group):
 
 ```ruby
 gem 'next_rails'
