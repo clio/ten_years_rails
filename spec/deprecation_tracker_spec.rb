@@ -2,6 +2,8 @@ require "tempfile"
 require_relative "spec_helper"
 require_relative "../lib/deprecation_tracker"
 
+RSpec::Matchers.define_negated_matcher :not_raise_error, :raise_error
+
 RSpec.describe DeprecationTracker do
   let(:shitlist_path) do
     shitlist_path = Tempfile.new("tmp").path
@@ -268,6 +270,19 @@ RSpec.describe DeprecationTracker do
       end.to output("oh\nno\n").to_stderr
 
       expect(warn_messages).to eq(["oh", "no"])
+    end
+
+    describe "bug when warning uses the uplevel keyword argument" do
+      context "given I setup the DeprecationTracker::KernelWarnTracker with a callback that manipulates messages as Strings" do
+
+        DeprecationTracker::KernelWarnTracker.callbacks << -> (message) { message.gsub("Rails.root/", "") }
+
+        context "and given that I call code that emits a warning using the uplevel keyword arg" do
+          it "throws a MissingMethod Error" do
+            expect { Kernel.warn("Oh no", uplevel: 1) }.to not_raise_error.and output.to_stderr
+          end
+        end
+      end
     end
   end
 end
