@@ -23,7 +23,11 @@ class DeprecationTracker
         messages.each { |message| callback.(message) }
       end
 
-      super
+      if Gem::Version.new(RUBY_VERSION) < Gem::Version.new("2.5.0")
+        super *messages
+      else
+        super
+      end
     end
   end
 
