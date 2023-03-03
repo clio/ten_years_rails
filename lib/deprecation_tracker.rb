@@ -18,12 +18,16 @@ class DeprecationTracker
       @callbacks ||= []
     end
 
-    def warn(*messages)
+    def warn(*messages, uplevel: nil)
       KernelWarnTracker.callbacks.each do |callback|
         messages.each { |message| callback.(message) }
       end
 
-      super
+      if Gem::Version.new(RUBY_VERSION) < Gem::Version.new("2.5.0")
+        super *messages
+      else
+        super
+      end
     end
   end
 
