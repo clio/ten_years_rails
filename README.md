@@ -98,7 +98,7 @@ deprecations run
 deprecations --help # For more options and examples
 ```
 
-Right now, the path to the shitlist is hardcoded so make sure you store yours at `spec/support/deprecations.shitlist.json`.
+Right now, the path to the shitlist is hardcoded so make sure you store yours at `spec/support/deprecation_warning.shitlist.json`.
 
 #### `next_rails` command
 
