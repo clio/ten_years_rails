@@ -39,6 +39,8 @@ module NextRails
       "activejob",
       "activestorage",
       "activesupport",
+      "actionmailbox",
+      "actiontext",
       "railties",
     ].freeze
 
