@@ -49,7 +49,7 @@ module NextRails
 <%= incompatible_gems.length.to_s.red %> gems incompatible with Rails <%= rails_version %>
       ERB
 
-      puts ERB.new(template, nil, "-").result(binding)
+      puts ERB.new(template, trim_mode: "-").result(binding)
     end
 
     def gem_header(_gem)
