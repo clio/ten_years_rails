@@ -1,5 +1,9 @@
-# main [(unreleased)](https://github.com/fastruby/next_rails/compare/v1.2.3...main)
+# main [(unreleased)](https://github.com/fastruby/next_rails/compare/v1.2.4...main)
 * Your changes/patches go here.
+
+# v1.2.4 / 2023-04-21 [(commits)](https://github.com/fastruby/next_rails/compare/v1.2.3...v1.2.4)
+
+- [BUGFIX: Update the warn method signature to support for Ruby 3]
 
 # v1.2.3 / 2023-04-12 [(commits)](https://github.com/fastruby/next_rails/compare/v1.2.2...v1.2.3)
 
