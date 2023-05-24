@@ -13,6 +13,8 @@ RSpec.describe NextRails do
     context "when BUNDLE_GEMFILE is set" do
       context "when it is set to Gemfile.next" do
         it "returns true" do
+          NextRails.reset_next_bundle_gemfile
+
           ClimateControl.modify BUNDLE_GEMFILE: "Gemfile.next" do
             expect(NextRails.next?).to be_truthy
           end
@@ -21,6 +23,8 @@ RSpec.describe NextRails do
 
       context "when it is set to something else" do
         it "returns false" do
+          NextRails.reset_next_bundle_gemfile
+
           ClimateControl.modify BUNDLE_GEMFILE: "Gemfile4" do
             expect(NextRails.next?).to be_falsey
           end
