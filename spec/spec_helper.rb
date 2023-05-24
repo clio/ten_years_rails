@@ -1,4 +1,3 @@
-
 if ENV['COVERAGE'] == 'true'
   require 'simplecov'
   SimpleCov.start do
@@ -20,6 +19,7 @@ end
 
 require "bundler/setup"
 require "next_rails"
+require "climate_control"
 
 require 'webmock/rspec'
 WebMock.disable_net_connect!(allow_localhost: true)
