@@ -45,6 +45,26 @@ bundle_report --help
 bundle_report ruby_check --rails-version=7.0.0
 ```
 
+### Application usage
+
+Every now and then it will be necessary to add code like this to your
+application:
+
+```ruby
+if NextRails.next?
+  # Do things "the Rails 7 way"
+else
+  # Do things "the Rails 6.1 way"
+end
+```
+
+The `NextRails.next?` method will use your environment
+(e.g. `ENV['BUNDLE_GEMFILE]`) to determine whether your application is
+running with the next set of dependencies or the current set of dependencies.
+
+This might come in handy if you need to inject
+[Ruby or Rails shims](https://www.fastruby.io/blog/rails/upgrades/rails-upgrade-shims.html).
+
 ### Deprecation tracking
 
 If you're using RSpec, add this snippet to `rails_helper.rb` or `spec_helper.rb` (whichever loads Rails).
