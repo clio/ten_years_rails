@@ -6,6 +6,7 @@ require "next_rails/bundle_report"
 require "deprecation_tracker"
 
 module NextRails
+  @@next_bundle_gemfile = nil
 
   # This method will check your environment
   # (e.g. `ENV['BUNDLE_GEMFILE]`) to determine whether your application is
@@ -13,7 +14,9 @@ module NextRails
   #
   # @return [Boolean]
   def self.next?
-    @@next_bundle_gemfile ||= ENV["BUNDLE_GEMFILE"] == "Gemfile.next"
+    return @@next_bundle_gemfile unless @@next_bundle_gemfile.nil?
+
+    @@next_bundle_gemfile = File.exist?(ENV["BUNDLE_GEMFILE"]) && File.basename(ENV["BUNDLE_GEMFILE"]) == "Gemfile.next"
   end
 
   # This method will reset the @@next_bundle_gemfile variable. Then next time
