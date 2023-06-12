@@ -17,6 +17,10 @@ module NextRails
 
       incompatible_gems_by_state = incompatible_gems.group_by { |gem| gem.state(rails_version) }
 
+      puts erb_output(incompatible_gems_by_state, incompatible_gems, rails_version)
+    end
+
+    def erb_output(incompatible_gems_by_state, incompatible_gems, rails_version)
       template = <<-ERB
 <% if incompatible_gems_by_state[:found_compatible] -%>
 <%= "=> Incompatible with Rails #{rails_version} (with new versions that are compatible):".white.bold %>
@@ -49,7 +53,16 @@ module NextRails
 <%= incompatible_gems.length.to_s.red %> gems incompatible with Rails <%= rails_version %>
       ERB
 
-      puts ERB.new(template, trim_mode: "-").result(binding)
+      erb_version = ERB.version
+      if erb_version =~ /erb.rb \[([\d\.]+) .*\]/
+        erb_version = $1
+      end
+
+      if Gem::Version.new(erb_version) < Gem::Version.new("2.2")
+        ERB.new(template, nil, "-").result(binding)
+      else
+        ERB.new(template, trim_mode: "-").result(binding)
+      end
     end
 
     def gem_header(_gem)

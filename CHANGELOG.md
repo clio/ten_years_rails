@@ -1,6 +1,8 @@
 # main [(unreleased)](https://github.com/fastruby/next_rails/compare/v1.2.4...main)
 * Your changes/patches go here.
 
+- [BUGFIX: Support ERB versions older than 2.2.0](https://github.com/fastruby/next_rails/pull/100)
+
 # v1.2.4 / 2023-04-21 [(commits)](https://github.com/fastruby/next_rails/compare/v1.2.3...v1.2.4)
 
 - [BUGFIX: Update the warn method signature to support for Ruby 3]
