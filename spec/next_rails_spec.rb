@@ -18,9 +18,8 @@ RSpec.describe NextRails do
           FileUtils.touch("Gemfile.next")
           NextRails.reset_next_bundle_gemfile
 
-          ClimateControl.modify BUNDLE_GEMFILE: "Gemfile.next" do
-            expect(NextRails.next?).to be_truthy
-          end
+          with_env("BUNDLE_GEMFILE" => "Gemfile.next")
+          expect(NextRails.next?).to be_truthy
         end
 
         context "when Gemfile.next file does not exist" do
@@ -28,9 +27,8 @@ RSpec.describe NextRails do
             FileUtils.rm("Gemfile.next")
             NextRails.reset_next_bundle_gemfile
 
-            ClimateControl.modify BUNDLE_GEMFILE: "Gemfile.next" do
-              expect(NextRails.next?).to be_falsey
-            end
+            with_env("BUNDLE_GEMFILE" => "Gemfile.next")
+            expect(NextRails.next?).to be_falsey
           end
         end
       end
@@ -40,9 +38,8 @@ RSpec.describe NextRails do
           FileUtils.touch("Gemfile4")
           NextRails.reset_next_bundle_gemfile
 
-          ClimateControl.modify BUNDLE_GEMFILE: "Gemfile4" do
-            expect(NextRails.next?).to be_falsey
-          end
+          with_env("BUNDLE_GEMFILE" => "Gemfile4")
+          expect(NextRails.next?).to be_falsey
 
           FileUtils.rm("Gemfile4")
         end
