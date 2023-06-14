@@ -2,7 +2,8 @@
 
 * Your changes/patches go here.
 
-* [FEATURE: Add NextRails.next? for application usage (e.g. Rails shims)](https://github.com/fastruby/next_rails/pull/97)
+- [FEATURE: Add NextRails.next? for application usage (e.g. Rails shims)](https://github.com/fastruby/next_rails/pull/97)
+- [BUGFIX: Support ERB versions older than 2.2.0](https://github.com/fastruby/next_rails/pull/100)
 
 # v1.2.4 / 2023-04-21 [(commits)](https://github.com/fastruby/next_rails/compare/v1.2.3...v1.2.4)
 
