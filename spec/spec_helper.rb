@@ -46,5 +46,5 @@ RSpec.configure do |config|
 end
 
 def with_env(env_hash)
-  stub_const("ENV", env_hash)
+  stub_const("ENV", ENV.to_hash.merge!(env_hash))
 end
