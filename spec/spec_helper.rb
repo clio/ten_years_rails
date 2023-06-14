@@ -1,4 +1,3 @@
-
 if ENV['COVERAGE'] == 'true'
   require 'simplecov'
   SimpleCov.start do
@@ -44,4 +43,8 @@ RSpec.configure do |config|
       with(headers: {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'Host'=>'rubygems.org', 'User-Agent'=>'Ruby'}).
       to_return(status: 200, body: "[{\"number\": \"7.0.0\"}, {\"number\": \"6.1.6\"}]", headers: {})
   end
+end
+
+def with_env(env_hash)
+  stub_const("ENV", ENV.to_hash.merge!(env_hash))
 end
