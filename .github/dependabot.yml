@@ -1,14 +1,13 @@
+---
 version: 2
 registries:
-  rubygems-jfrog:
+  rubygems-github:
     type: rubygems-server
-    url: https://clio.jfrog.io/clio/api/gems/product-gem-prod/
-    username: ${{secrets.ARTIFACTORY_USERNAME}}
-    password: ${{secrets.ARTIFACTORY_API_KEY}}
-
+    url: https://rubygems.pkg.github.com/clio
+    token: "${{ secrets.DEPENDABOT_GITHUB_TOKEN }}"
 updates:
-  - package-ecosystem: "bundler"
-    directory: "/"
-    schedule:
-      interval: monthly
-    open-pull-requests-limit: 0
+- package-ecosystem: bundler
+  directory: "/"
+  schedule:
+    interval: monthly
+  open-pull-requests-limit: 0
