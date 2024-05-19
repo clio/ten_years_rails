@@ -1,3 +1,7 @@
+# frozen_string_literal: true
+
+require "spec_helper"
+
 require "fileutils"
 
 RSpec.describe NextRails do
