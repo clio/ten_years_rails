@@ -1,8 +1,10 @@
-require "colorize"
+require "rainbow/refinement"
 require "cgi"
 require "erb"
 require "json"
 require "net/http"
+
+using Rainbow
 
 module NextRails
   module BundleReport
