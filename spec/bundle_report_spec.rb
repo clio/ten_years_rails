@@ -5,6 +5,8 @@ require 'tempfile'
 require_relative 'spec_helper'
 require_relative '../lib/next_rails/bundle_report'
 
+using Rainbow
+
 RSpec.describe NextRails::BundleReport do
   describe '.outdated' do
     let(:mock_version) { Struct.new(:version, :age) }

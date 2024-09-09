@@ -1,8 +1,10 @@
 #!/usr/bin/env ruby
 require "json"
-require "colorize"
+require "rainbow/refinement"
 require "optparse"
 require "set"
+
+using Rainbow
 
 def run_tests(deprecation_warnings, opts = {})
   tracker_mode = opts[:tracker_mode]
