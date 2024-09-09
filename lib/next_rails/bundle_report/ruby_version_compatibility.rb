@@ -1,6 +1,8 @@
-require "colorize"
+require "rainbow/refinement"
 
 class NextRails::BundleReport::RubyVersionCompatibility
+  using Rainbow
+
   MINIMAL_VERSION = 1.0
   attr_reader :gems, :options
 
