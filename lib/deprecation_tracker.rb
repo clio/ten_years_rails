@@ -1,5 +1,7 @@
-require "colorize"
+require "rainbow/refinement"
 require "json"
+
+using Rainbow
 
 # A shitlist for deprecation warnings during test runs. It has two modes: "save" and "compare"
 #

@@ -3,6 +3,7 @@
 * Your changes/patches go here.
 
 - [FEATURE: Support compatibility for Ruby versions](https://github.com/fastruby/next_rails/pull/116)
+- [CHORE: Remove GPL licensed dependency Colorize and replace it with Rainbow]
 
 # v1.3.0 / 2023-06-16 [(commits)](https://github.com/fastruby/next_rails/compare/v1.2.4...v1.3.0)
 
