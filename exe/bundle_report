@@ -16,6 +16,7 @@ at_exit do
 
       Examples:
         #{$0} compatibility --rails-version 5.0
+        #{$0} compatibility --ruby-version 3.3
         #{$0} outdated
         #{$0} outdated --json
 
@@ -31,6 +32,10 @@ at_exit do
 
     opts.on("--rails-version [STRING]", "Rails version to check compatibility against (defaults to 5.0)") do |rails_version|
       options[:rails_version] = rails_version
+    end
+
+    opts.on("--ruby-version [STRING]", "Ruby version to check compatibility against (defaults to 2.3)") do |ruby_version|
+      options[:ruby_version] = ruby_version
     end
 
     opts.on("--include-rails-gems", "Include Rails gems in compatibility report (defaults to false)") do
@@ -61,7 +66,11 @@ at_exit do
   when "ruby_check" then NextRails::BundleReport.compatible_ruby_version(rails_version: options.fetch(:rails_version))
   when "outdated" then NextRails::BundleReport.outdated(options.fetch(:format, nil))
   else
-    NextRails::BundleReport.compatibility(rails_version: options.fetch(:rails_version, "5.0"), include_rails_gems: options.fetch(:include_rails_gems, false))
+    if options[:ruby_version]
+      NextRails::BundleReport.compatibility(ruby_version: options.fetch(:ruby_version, "2.3"))
+    else
+      NextRails::BundleReport.compatibility(rails_version: options.fetch(:rails_version, "5.0"), include_rails_gems: options.fetch(:include_rails_gems, false))
+    end
   end
 end
 

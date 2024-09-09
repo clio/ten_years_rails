@@ -39,10 +39,14 @@ bundle_report outdated --json
 # Show gems that don't work with Rails 5.2.0
 bundle_report compatibility --rails-version=5.2.0
 
-# Show the usual help message
-bundle_report --help
+# Show gems that don't work with Ruby 3.0
+bundle_report compatibility --ruby-version=3.0
+
 # Find minimum compatible ruby version with Rails 7.0.0
 bundle_report ruby_check --rails-version=7.0.0
+
+# Show the usual help message
+bundle_report --help
 ```
 
 ### Application usage

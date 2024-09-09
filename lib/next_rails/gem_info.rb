@@ -147,5 +147,9 @@ module NextRails
         rails_dependency.requirement.satisfied_by?(Gem::Version.new(rails_version))
       end
     end
+
+    def compatible_with_ruby?(ruby_version)
+      gem_specification.required_ruby_version.satisfied_by?(Gem::Version.new(ruby_version))
+    end
   end
 end
