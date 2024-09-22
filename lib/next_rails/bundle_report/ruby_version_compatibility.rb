@@ -1,4 +1,6 @@
-require "colorize"
+require "rainbow/refinement"
+
+using Rainbow
 
 class NextRails::BundleReport::RubyVersionCompatibility
   MINIMAL_VERSION = 1.0
