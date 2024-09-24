@@ -24,19 +24,3 @@ jobs:
           bundler-cache: true
       - name: Run rake task
         run: bundle exec rake
-
-  test_older:
-    runs-on: ubuntu-20.04
-    strategy:
-      matrix:
-        ruby-version: [2.2, 2.1, 2.0.0]
-
-    steps:
-      - uses: actions/checkout@v2
-      - name: Set up Ruby ${{ matrix.ruby-version }}
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: ${{ matrix.ruby-version }}
-          bundler-cache: true
-      - name: Run rake task
-        run: bundle exec rake

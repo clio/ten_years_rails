@@ -2,6 +2,7 @@
 
 * Your changes/patches go here.
 
+- [CHORE: Remove 2.0.0, 2.1, 2.2 Ruby support](https://github.com/fastruby/next_rails/pull/126)
 - [CHORE: Update compatibility for Ruby versions to use Rainbow](https://github.com/fastruby/next_rails/pull/125)
 - [FEATURE: Support compatibility for Ruby versions](https://github.com/fastruby/next_rails/pull/116)
 - [CHORE: Remove GPL licensed dependency Colorize and replace it with Rainbow]
