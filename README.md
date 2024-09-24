@@ -1,5 +1,7 @@
 # Next Rails
 
+[![Continuous Integration](https://github.com/fastruby/next_rails/actions/workflows/main.yml/badge.svg)](https://github.com/fastruby/next_rails/actions/workflows/main.yml)
+
 This is a toolkit to upgrade your next Rails application. It will help you
 set up dual booting, track deprecation warnings, and get a report on outdated
 dependencies for any Rails application.
