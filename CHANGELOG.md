@@ -1,6 +1,7 @@
 # main [(unreleased)](https://github.com/fastruby/next_rails/compare/v1.3.0...main)
 
 * Your changes/patches go here.
+- [CHORE: Use next_rails namespace on spec tests.](https://github.com/fastruby/next_rails/pull/117)
 
 - [CHORE: Remove 2.0.0, 2.1, 2.2 Ruby support](https://github.com/fastruby/next_rails/pull/126)
 - [CHORE: Update compatibility for Ruby versions to use Rainbow](https://github.com/fastruby/next_rails/pull/125)

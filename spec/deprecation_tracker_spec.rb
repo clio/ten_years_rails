@@ -1,5 +1,9 @@
+# frozen_string_literal: true
+
+require "spec_helper"
+
+require "date"
 require "tempfile"
-require_relative "spec_helper"
 require_relative "../lib/deprecation_tracker"
 
 RSpec::Matchers.define_negated_matcher :not_raise_error, :raise_error
