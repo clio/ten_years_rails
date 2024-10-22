@@ -1,10 +1,8 @@
-require "rainbow/refinement"
+require "rainbow"
 require "cgi"
 require "erb"
 require "json"
 require "net/http"
-
-using Rainbow
 
 module NextRails
   module BundleReport
@@ -27,8 +25,8 @@ module NextRails
     def erb_output(incompatible_gems_by_state, incompatible_gems, rails_version)
       template = <<-ERB
 <% if incompatible_gems_by_state[:found_compatible] -%>
-<%= "=> Incompatible with Rails #{rails_version} (with new versions that are compatible):".white.bold %>
-<%= "These gems will need to be upgraded before upgrading to Rails #{rails_version}.".italic %>
+<%= Rainbow("=> Incompatible with Rails #{rails_version} (with new versions that are compatible):").white.bold %>
+<%= Rainbow("These gems will need to be upgraded before upgrading to Rails #{rails_version}.").italic %>
 
 <% incompatible_gems_by_state[:found_compatible].each do |gem| -%>
 <%= gem_header(gem) %> - upgrade to <%= gem.latest_compatible_version.version %>
@@ -36,8 +34,8 @@ module NextRails
 
 <% end -%>
 <% if incompatible_gems_by_state[:incompatible] -%>
-<%= "=> Incompatible with Rails #{rails_version} (with no new compatible versions):".white.bold %>
-<%= "These gems will need to be removed or replaced before upgrading to Rails #{rails_version}.".italic %>
+<%= Rainbow("=> Incompatible with Rails #{rails_version} (with no new compatible versions):").white.bold %>
+<%= Rainbow("These gems will need to be removed or replaced before upgrading to Rails #{rails_version}.").italic %>
 
 <% incompatible_gems_by_state[:incompatible].each do |gem| -%>
 <%= gem_header(gem) %> - new version, <%= gem.latest_version.version %>, is not compatible with Rails #{rails_version}
@@ -45,16 +43,16 @@ module NextRails
 
 <% end -%>
 <% if incompatible_gems_by_state[:no_new_version] -%>
-<%= "=> Incompatible with Rails #{rails_version} (with no new versions):".white.bold %>
-<%= "These gems will need to be upgraded by us or removed before upgrading to Rails #{rails_version}.".italic %>
-<%= "This list is likely to contain internal gems, like Cuddlefish.".italic %>
+<%= Rainbow("=> Incompatible with Rails #{rails_version} (with no new versions):").white.bold %>
+<%= Rainbow("These gems will need to be upgraded by us or removed before upgrading to Rails #{rails_version}.").italic %>
+<%= Rainbow("This list is likely to contain internal gems, like Cuddlefish.").italic %>
 
 <% incompatible_gems_by_state[:no_new_version].each do |gem| -%>
 <%= gem_header(gem) %> - new version not found
 <% end -%>
 
 <% end -%>
-<%= incompatible_gems.length.to_s.red %> gems incompatible with Rails <%= rails_version %>
+<%= Rainbow(incompatible_gems.length.to_s).red %> gems incompatible with Rails <%= rails_version %>
       ERB
 
       erb_version = ERB.version
@@ -70,8 +68,8 @@ module NextRails
     end
 
     def gem_header(_gem)
-      header = "#{_gem.name} #{_gem.version}".bold
-      header << " (loaded from git)".magenta if _gem.sourced_from_git?
+      header = Rainbow("#{_gem.name} #{_gem.version}").bold
+      header << Rainbow(" (loaded from git)").magenta if _gem.sourced_from_git?
       header
     end
 
@@ -158,14 +156,14 @@ module NextRails
         header = "#{gem.name} #{gem.version}"
 
         puts <<-MESSAGE
-          #{header.bold.white}: released #{gem.age} (latest version, #{gem.latest_version.version}, released #{gem.latest_version.age})
+          #{Rainbow(header.bold.white)}: released #{gem.age} (latest version, #{gem.latest_version.version}, released #{gem.latest_version.age})
         MESSAGE
       end
 
       percentage_out_of_date = ((out_of_date_gems.count / total_gem_count.to_f) * 100).round
       footer = <<-MESSAGE
-        #{sourced_from_git_count.to_s.yellow} gems are sourced from git
-        #{out_of_date_gems.count.to_s.red} of the #{total_gem_count} gems are out-of-date (#{percentage_out_of_date}%)
+        #{Rainbow(sourced_from_git_count.to_s).yellow} gems are sourced from git
+        #{Rainbow(out_of_date_gems.count.to_s).red} of the #{total_gem_count} gems are out-of-date (#{percentage_out_of_date}%)
       MESSAGE
 
       puts ''

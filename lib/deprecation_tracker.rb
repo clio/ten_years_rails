@@ -1,7 +1,5 @@
-require "rainbow/refinement"
+require "rainbow"
 require "json"
-
-using Rainbow
 
 # A shitlist for deprecation warnings during test runs. It has two modes: "save" and "compare"
 #
@@ -152,7 +150,7 @@ class DeprecationTracker
     end
 
     if changed_buckets.length > 0
-      message = <<-MESSAGE.red
+      message = <<-MESSAGE
         ⚠️  Deprecation warnings have changed!
 
         Code called by the following spec files is now generating different deprecation warnings:
@@ -170,7 +168,7 @@ class DeprecationTracker
         See \e[4;37mdev-docs/testing/deprecation_tracker.md\e[0;31m for more information.
       MESSAGE
 
-      raise UnexpectedDeprecations, message
+      raise UnexpectedDeprecations, Rainbow(message).red
     end
   end
 
