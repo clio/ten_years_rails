@@ -2,6 +2,10 @@
 
 * Your changes/patches go here.
 
+# v1.4.1 / 2024-10-22 [(commits)](https://github.com/fastruby/next_rails/compare/v1.4.0...v1.4.1)
+
+- [BUGFIX: Fix performance regression due to rainbow refinement](https://github.com/fastruby/next_rails/pull/131)
+
 # v1.4.0 / 2024-09-24 [(commits)](https://github.com/fastruby/next_rails/compare/v1.3.0...v1.4.0)
 
 - [CHORE: Use next_rails namespace on spec tests.](https://github.com/fastruby/next_rails/pull/117)
