@@ -156,7 +156,7 @@ module NextRails
         header = "#{gem.name} #{gem.version}"
 
         puts <<-MESSAGE
-          #{Rainbow(header.bold.white)}: released #{gem.age} (latest version, #{gem.latest_version.version}, released #{gem.latest_version.age})
+          #{Rainbow(header).bold.white}: released #{gem.age} (latest version, #{gem.latest_version.version}, released #{gem.latest_version.age})
         MESSAGE
       end
 
