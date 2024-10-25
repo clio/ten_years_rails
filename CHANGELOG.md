@@ -1,6 +1,10 @@
-# main [(unreleased)](https://github.com/fastruby/next_rails/compare/v1.4.0...main)
+# main [(unreleased)](https://github.com/fastruby/next_rails/compare/v1.4.2...main)
 
 * Your changes/patches go here.
+
+# v1.4.2 / 2024-10-25 [(commits)](https://github.com/fastruby/next_rails/compare/v1.4.1...v1.4.2)
+
+- [BUGFIX: Rainbow patch: the methods (bold & white) are not on String](https://github.com/fastruby/next_rails/pull/132)
 
 # v1.4.1 / 2024-10-22 [(commits)](https://github.com/fastruby/next_rails/compare/v1.4.0...v1.4.1)
 
