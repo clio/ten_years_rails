@@ -1,5 +1,7 @@
 # main [(unreleased)](https://github.com/fastruby/next_rails/compare/v1.4.2...main)
 
+- [Add Ruby 3.4 support](https://github.com/fastruby/next_rails/pull/133)
+
 * Your changes/patches go here.
 
 # v1.4.2 / 2024-10-25 [(commits)](https://github.com/fastruby/next_rails/compare/v1.4.1...v1.4.2)
