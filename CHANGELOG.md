@@ -1,9 +1,13 @@
-# main [(unreleased)](https://github.com/fastruby/next_rails/compare/v1.4.2...main)
+# main [(unreleased)](https://github.com/fastruby/next_rails/compare/v1.4.3...main)
+
+- [BUGFIX: example](https://github.com/fastruby/next_rails/pull/<number>)
+
+* Your changes/patches go here.
+
+# v1.4.3 / 2025-02-20 [(commits)](https://github.com/fastruby/next_rails/compare/v1.4.2...v1.4.3)
 
 - [Add next_rails --init](https://github.com/fastruby/next_rails/pull/139)
 - [Add Ruby 3.4 support](https://github.com/fastruby/next_rails/pull/133)
-
-* Your changes/patches go here.
 
 # v1.4.2 / 2024-10-25 [(commits)](https://github.com/fastruby/next_rails/compare/v1.4.1...v1.4.2)
 
