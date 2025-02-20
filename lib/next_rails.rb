@@ -2,6 +2,7 @@
 
 require "next_rails/gem_info"
 require "next_rails/version"
+require "next_rails/init"
 require "next_rails/bundle_report"
 require "next_rails/bundle_report/ruby_version_compatibility"
 require "deprecation_tracker"

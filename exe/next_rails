@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 require "optparse"
 require "next_rails/version"
+require "next_rails"
 
 options = {}
 option_parser = OptionParser.new do |opts|
@@ -10,6 +11,10 @@ option_parser = OptionParser.new do |opts|
     Examples:
       bin/next_rails --version info # Show the version of the gem installed
   MESSAGE
+
+  opts.on("--init", "Setup the dual-boot configuration") do
+    options[:init] = true
+  end
 
   opts.on("--version", "show version of the gem") do
     options[:version] = true
@@ -22,6 +27,8 @@ option_parser = OptionParser.new do |opts|
 end
 
 option_parser.parse!
+
+puts NextRails::Init.call if options.fetch(:init, false)
 
 if options.fetch(:version, false)
   puts NextRails::VERSION
