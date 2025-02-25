@@ -251,6 +251,48 @@ RSpec.describe DeprecationTracker do
     end
   end
 
+  describe "#init_tracker" do
+    it "returns a new instance of DeprecationTracker" do
+      tracker = DeprecationTracker.init_tracker({mode: "save"})
+      expect(tracker).to be_a(DeprecationTracker)
+    end
+
+    it "subscribes to KernelWarnTracker deprecation events" do
+      expect do
+        DeprecationTracker.init_tracker({mode: "save"})
+      end.to change(DeprecationTracker::KernelWarnTracker.callbacks, :size).by(1)
+    end
+
+    context "when Rails.application.deprecation is not defined and ActiveSupport is defined" do
+      it "sets the ActiveSupport::Deprecation behavior" do
+        # Stub ActiveSupport::Deprecation with a simple behavior array
+        stub_const("ActiveSupport::Deprecation", Class.new {
+          def self.behavior
+            @behavior ||= []
+          end
+        })
+
+        expect do
+          DeprecationTracker.init_tracker({mode: "save"})
+        end.to change(ActiveSupport::Deprecation.behavior, :size).by(1)
+      end
+    end
+
+    context "when Rails.application.deprecation is defined" do
+      it "sets the behavior of each Rails.application.deprecators" do
+        # Stub Rails.application.deprecators with an array of mock deprecators
+        fake_deprecator_1 = double("Deprecator", behavior: [])
+        fake_deprecator_2 = double("Deprecator", behavior: [])
+        stub_const("Rails", Module.new)
+        allow(Rails).to receive_message_chain(:application, :deprecators).and_return([fake_deprecator_1, fake_deprecator_2])
+
+        expect do
+          DeprecationTracker.init_tracker({ mode: "save" })
+        end.to change(fake_deprecator_1.behavior, :size).by(1).and change(fake_deprecator_2.behavior, :size).by(1)
+      end
+    end
+  end
+
   describe DeprecationTracker::KernelWarnTracker do
     it "captures Kernel#warn" do
       warn_messages = []
