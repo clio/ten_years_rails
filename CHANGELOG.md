@@ -4,6 +4,8 @@
 
 * Your changes/patches go here.
 
+- [FEATURE: Update deprecation tracker to support newer Rails versions (7.1+)](https://github.com/fastruby/next_rails/pull/142)
+
 # v1.4.3 / 2025-02-20 [(commits)](https://github.com/fastruby/next_rails/compare/v1.4.2...v1.4.3)
 
 - [Add next_rails --init](https://github.com/fastruby/next_rails/pull/139)
