@@ -73,7 +73,17 @@ class DeprecationTracker
     mode = opts[:mode]
     transform_message = opts[:transform_message]
     deprecation_tracker = DeprecationTracker.new(shitlist_path, transform_message, mode)
-    if defined?(ActiveSupport)
+    # Since Rails 7.1 the preferred way to track deprecations is to use the deprecation trackers via
+    # `Rails.application.deprecators`.
+    # We fallback to tracking deprecations via the ActiveSupport singleton object if Rails.application.deprecators is
+    # not defined for older Rails versions.
+    if defined?(Rails) && defined?(Rails.application) && defined?(Rails.application.deprecators)
+      Rails.application.deprecators.each do |deprecator|
+        deprecator.behavior << -> (message, _callstack = nil, _deprecation_horizon = nil, _gem_name = nil) {
+          deprecation_tracker.add(message)
+        }
+      end
+    elsif defined?(ActiveSupport)
       ActiveSupport::Deprecation.behavior << -> (message, _callstack = nil, _deprecation_horizon = nil, _gem_name = nil) {
         deprecation_tracker.add(message)
       }
