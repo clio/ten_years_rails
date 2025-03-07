@@ -1,6 +1,7 @@
 # main [(unreleased)](https://github.com/fastruby/next_rails/compare/v1.4.4...main)
 
 - [BUGFIX: example](https://github.com/fastruby/next_rails/pull/<number>)
+- [Move rails_version compatibility to its own class](https://github.com/fastruby/next_rails/pull/137)
 
 * Your changes/patches go here.
 
