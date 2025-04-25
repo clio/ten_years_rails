@@ -18,7 +18,7 @@ class DeprecationTracker
       @callbacks ||= []
     end
 
-    def warn(*messages, uplevel: nil, category: nil)
+    def warn(*messages, **kwargs)      
       KernelWarnTracker.callbacks.each do |callback|
         messages.each { |message| callback.(message) }
       end
